@@ -56,29 +56,25 @@ spec:
             weight: 35
       containers:
       - env:
-        - name: WATCH_NAMESPACE
         - name: POD_NAME
           valueFrom:
             fieldRef:
               apiVersion: v1
               fieldPath: metadata.name
-        - name: OPERATOR_NAME
-          value: klusterlet-addon-controller
-        - name: HUB_VERSION
-          value: 2.12.0
-        - name: USE_SHA_MANIFEST
-          value: "true"
-        - name: DEFAULT_IMAGE_PULL_SECRET
-          value: open-cluster-management-image-pull-credentials
-        - name: DEFAULT_IMAGE_REGISTRY
-        - name: ADDON_CLUSTERROLE_PREFIX
-          value: 'open-cluster-management:addons:'
         - name: POD_NAMESPACE
           valueFrom:
             fieldRef:
               apiVersion: v1
               fieldPath: metadata.namespace
-        image: quay.io/stolostron/klusterlet-addon-controller:2.12.0-SNAPSHOT-2024-08-09-21-58-39
+        - name: CERT_POLICY_CONTROLLER
+          value: quay.io/stolostron/cert-policy-controller@sha256:da73d9ea6a9016106766c0ee28ae4b6facb6788c2cbadccc9c98df711ed42a69
+        - name: CONFIG_POLICY_CONTROLLER
+          value: quay.io/stolostron/config-policy-controller@sha256:d59381b54117a015dd9ec1264396f084a4ac26ed37bb02dfc5ae199e7c5fe46a
+        - name: GOVERNANCE_POLICY_FRAMEWORK_ADDON
+          value: quay.io/stolostron/governance-policy-framework-addon@sha256:0fcc848cdf5e784e0610ada66ab0d7b899aafc4925c5544e1b9173edcc68f3c0
+        - name: EnvKubeRBACProxy
+          value: quay.io/stolostron/kube-rbac-proxy@sha256:1b708bff7fb46391f2460d34be28d30add38501cdb084306df01faae75637232
+        image: quay.io/stolostron/klusterlet-addon-controller@sha256:7c37135dc71935c0cbf09bb9548f0678b65bad1aa65f8ba05cf294769de45af9
         imagePullPolicy: IfNotPresent
         name: klusterlet-addon-controller
         resources:

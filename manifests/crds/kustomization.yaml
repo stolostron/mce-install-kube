@@ -1,0 +1,2 @@
+resources:
+- agent.open-cluster-management.io_klusterletaddonconfigs_crd.yaml
