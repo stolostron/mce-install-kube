@@ -1,0 +1,14 @@
+apiVersion: agent.open-cluster-management.io/v1
+kind: KlusterletAddonConfig
+metadata:
+  name: local-cluster
+  namespace: local-cluster
+spec:
+  applicationManager:
+    enabled: false
+  certPolicyController:
+    enabled: true
+  policyController:
+    enabled: true
+  searchCollector:
+    enabled: false
