@@ -2,25 +2,28 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: klusterlet-addon-controller-v2
-    app.kubernetes.io/name: klusterlet-addon-controller
-    component: klusterlet-addon-controller
-  name: klusterlet-addon-controller-v2
+    app: grc
+    component: ocm-policy-addon-ctrl
+  name: grc-policy-addon-controller
   namespace: multicluster-engine
 spec:
+  progressDeadlineSeconds: 600
   replicas: 2
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: klusterlet-addon-controller-v2
-      component: klusterlet-addon-controller
+      app: grc
+      component: ocm-policy-addon-ctrl
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
-      creationTimestamp: null
       labels:
-        app: klusterlet-addon-controller-v2
-        app.kubernetes.io/name: klusterlet-addon-controller
-        component: klusterlet-addon-controller
-        ocm-antiaffinity-selector: klusterletaddon
+        app: grc
+        component: ocm-policy-addon-ctrl
     spec:
       affinity:
         nodeAffinity:
@@ -42,7 +45,7 @@ spec:
                 - key: ocm-antiaffinity-selector
                   operator: In
                   values:
-                  - klusterletaddon
+                  - grcpolicyaddon
               topologyKey: topology.kubernetes.io/zone
             weight: 70
           - podAffinityTerm:
@@ -51,31 +54,35 @@ spec:
                 - key: ocm-antiaffinity-selector
                   operator: In
                   values:
-                  - klusterletaddon
+                  - grcpolicyaddon
               topologyKey: kubernetes.io/hostname
             weight: 35
       containers:
-      - env:
+      - args:
+        - controller
+        command:
+        - governance-policy-addon-controller
+        env:
         - name: POD_NAME
           valueFrom:
             fieldRef:
               apiVersion: v1
               fieldPath: metadata.name
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              apiVersion: v1
-              fieldPath: metadata.namespace
-        image: quay.io/stolostron/klusterlet-addon-controller:2.12.0-SNAPSHOT-2024-09-18-21-46-30
+        - name: CERT_POLICY_CONTROLLER_IMAGE
+          value: quay.io/stolostron/cert-policy-controller:2.12.0-SNAPSHOT-2024-09-18-21-46-30
+        - name: CONFIG_POLICY_CONTROLLER_IMAGE
+          value: quay.io/stolostron/config-policy-controller:2.12.0-SNAPSHOT-2024-09-18-21-46-30
+        - name: KUBE_RBAC_PROXY_IMAGE
+          value: quay.io/stolostron/kube-rbac-proxy:2.12.0-SNAPSHOT-2024-09-18-21-46-30
+        - name: GOVERNANCE_POLICY_FRAMEWORK_ADDON_IMAGE
+          value: quay.io/stolostron/governance-policy-framework-addon:2.12.0-SNAPSHOT-2024-09-18-21-46-30
+        image: quay.io/stolostron/governance-policy-addon-controller:2.12.0-SNAPSHOT-2024-09-18-21-46-30
         imagePullPolicy: IfNotPresent
-        name: klusterlet-addon-controller
+        name: manager
         resources:
-          limits:
-            cpu: 500m
-            memory: 2Gi
           requests:
-            cpu: 50m
-            memory: 96Mi
+            cpu: 25m
+            memory: 64Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -83,8 +90,12 @@ spec:
             - ALL
           privileged: false
           readOnlyRootFilesystem: true
+          runAsNonRoot: true
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp
       dnsPolicy: ClusterFirst
       imagePullSecrets:
       - name: open-cluster-management-image-pull-credentials
@@ -92,10 +103,13 @@ spec:
       schedulerName: default-scheduler
       securityContext:
         runAsNonRoot: true
-      serviceAccount: klusterlet-addon-controller-v2
-      serviceAccountName: klusterlet-addon-controller-v2
-      terminationGracePeriodSeconds: 60
+      serviceAccount: grc-policy-addon-sa
+      serviceAccountName: grc-policy-addon-sa
+      terminationGracePeriodSeconds: 10
       tolerations:
       - effect: NoSchedule
         key: node-role.kubernetes.io/infra
         operator: Exists
+      volumes:
+      - emptyDir: {}
+        name: tmp

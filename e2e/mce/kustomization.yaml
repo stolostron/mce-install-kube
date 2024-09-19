@@ -1,0 +1,8 @@
+
+resources:
+- multicluster.openshift.io_multiclusterengines.yaml
+- clusterrole.yaml
+- clusterrolebinding.yaml
+- serviceaccount.yaml
+- deployment.yaml
+- service.yaml
