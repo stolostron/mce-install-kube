@@ -1,0 +1,5 @@
+resources:
+- grc-policy-addon-controller.yaml
+- grc-policy-addon-sa.yaml
+- grc-policy-propagator.yaml
+- grc-sa.yaml
