@@ -12,8 +12,7 @@ CRD_FILES="./multiclusterhub-operator/pkg/templates/crds/grc/policy.open-cluster
 ./multiclusterhub-operator/pkg/templates/crds/multicloud-operators-subscription/apps.open-cluster-management.io_placementrules_crd_v1.yaml
 "
 
-GRC_CMA_FILES="./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/cert-policy-clustermanagementaddon.yaml
-./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/config-policy-clustermanagementaddon.yaml
+GRC_CMA_FILES="./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/config-policy-clustermanagementaddon.yaml
 ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/governance-policy-framework-clustermanagementaddon.yaml
 "
 

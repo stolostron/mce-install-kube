@@ -7,7 +7,7 @@ spec:
   applicationManager:
     enabled: false
   certPolicyController:
-    enabled: true
+    enabled: false
   policyController:
     enabled: true
   searchCollector:
