@@ -1,4 +1,3 @@
 resources:
-- cert-policy-clustermanagementaddon.yaml
 - config-policy-clustermanagementaddon.yaml
 - governance-policy-framework-clustermanagementaddon.yaml

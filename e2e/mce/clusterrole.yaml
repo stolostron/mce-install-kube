@@ -491,6 +491,17 @@ rules:
 - apiGroups:
   - addon.open-cluster-management.io
   resources:
+  - addondeploymentconfigs
+  - clustermanagementaddons
+  verbs:
+  - create
+  - get
+  - list
+  - update
+  - watch
+- apiGroups:
+  - addon.open-cluster-management.io
+  resources:
   - addontemplates
   verbs:
   - create
@@ -582,6 +593,12 @@ rules:
   - managedclusteraddons/finalizers
   verbs:
   - update
+- apiGroups:
+  - addon.open-cluster-management.io
+  resources:
+  - clustermanagementaddons/status
+  verbs:
+  - patch
 - apiGroups:
   - addon.open-cluster-management.io
   resources:
@@ -1137,6 +1154,30 @@ rules:
   - list
   - watch
 - apiGroups:
+  - cert-manager.io
+  resources:
+  - certificates
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - cert-manager.io
+  resources:
+  - issuers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
   - certificates.k8s.io
   resources:
   - certificatesigningrequests
@@ -1654,6 +1695,13 @@ rules:
   - patch
   - update
 - apiGroups:
+  - events.k8s.io
+  resources:
+  - events
+  verbs:
+  - create
+  - patch
+- apiGroups:
   - extensions.hive.openshift.io
   resources:
   - '*'
@@ -1933,6 +1981,24 @@ rules:
 - apiGroups:
   - metal3.io
   resources:
+  - baremetalhosts/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - metal3.io
+  resources:
+  - dataimages
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - metal3.io
+  resources:
   - preprovisioningimages
   verbs:
   - create
@@ -1996,6 +2062,17 @@ rules:
 - apiGroups:
   - multicluster.openshift.io
   resources:
+  - internalenginecomponents
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - watch
+- apiGroups:
+  - multicluster.openshift.io
+  resources:
   - multiclusterengines
   verbs:
   - create
@@ -2019,6 +2096,18 @@ rules:
   - get
   - patch
   - update
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
 - apiGroups:
   - operator.open-cluster-management.io
   resources:
