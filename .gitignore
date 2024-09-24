@@ -1,0 +1,9 @@
+.project
+output
+_output
+.idea
+
+e2e.test
+.DS_Store
+
+.vscode

@@ -1,0 +1,19 @@
+global:
+  registry: "quay.io/stolostron"
+  tag: "2.12.0-SNAPSHOT-2024-09-23-23-44-29"
+  imageOverrides:
+    governance_policy_propagator: ""
+    governance_policy_addon_controller: "" 
+    config_policy_controller: ""
+    governance_policy_framework_addon: ""
+    klusterlet_addon_controller: ""
+ 
+  namespace: multicluster-engine
+
+grc:
+  hubconfig:
+    replicaCount: 1
+    
+cluster-lifecycle:
+  hubconfig:
+    replicaCount: 1

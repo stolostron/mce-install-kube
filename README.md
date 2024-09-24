@@ -3,36 +3,32 @@ The manifests of add-ons or components deployed on k8s platform like AKS etc.
 
 # Prerequisites
 
-The MCE operator is required to be installed on the Hub cluster.
+The MCE operator is required to be installed on the Hub cluster. 
 
-# Install
+[Here](configuration/multiclusterengine.yaml) is the MCE CR sample.
 
-1. Install CRDs
+# Configure the MCE 
 
-```bash
-kubectl apply -k ./manifests/crds
+1. Set the hub api server to the `spec.hubKubeAPIServerURL` in the `global` `klusterletConfig`, and then apply it.
+
+```
+kubectl apply -f ./configuration/klusterletconfig.yaml
 ```
 
-2. Install MCE CR and klusterletConfig
+2. Patch the `addonDeploymentConfig` for hypershift addon on non-OCP case.
 
-```bash
-kubectl apply -k ./manifests/cluster-resources
+```
+kubectl apply -f ./configuration/addondeploymentconfig.yaml
 ```
 
-3. Install klusterlet addon controller
+# Install ACM addons after MCE is installed
 
-```bash
-kubectl apply -k ./manifests/addon-controller
+```
+helm install acm-addon ./acm-addons
 ```
 
-4. Install policy controller
+# Enable policy addon for local-cluster
 
-```bash
-kubectl apply -k ./manifests/policy
 ```
-
-5. Install klusterletAddonConfig for local-cluster
-
-```bash
-kubectl apply -k ./manifests/local-cluster
+kubectl apply -f ./configuration/klusterletaddonconfig.yaml
 ```

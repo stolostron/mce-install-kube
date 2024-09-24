@@ -1,0 +1,10 @@
+global:
+  registry: "quay.io/stolostron"
+  tag: ""
+  imageOverrides:
+    klusterlet_addon_controller: ""
+
+  namespace: multicluster-engine
+
+hubconfig:
+  replicaCount: 1

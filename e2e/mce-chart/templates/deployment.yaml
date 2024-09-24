@@ -1,0 +1,138 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    control-plane: backplane-operator
+  name: multicluster-engine-operator
+  namespace: multicluster-engine
+spec:
+  progressDeadlineSeconds: 600
+  replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      control-plane: backplane-operator
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        control-plane: backplane-operator
+        ocm-antiaffinity-selector: backplane-operator
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: ocm-antiaffinity-selector
+                  operator: In
+                  values:
+                  - backplane-operator
+              topologyKey: topology.kubernetes.io/zone
+            weight: 70
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: ocm-antiaffinity-selector
+                  operator: In
+                  values:
+                  - backplane-operator
+              topologyKey: kubernetes.io/hostname
+            weight: 35
+      containers:
+      - args:
+        - --leader-elect
+        command:
+        - /app/backplane-operator
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: OPERAND_IMAGE_ADDON_MANAGER
+          value: {{ template "addon_manager" . }}
+        - name: OPERAND_IMAGE_BACKPLANE_OPERATOR
+          value: {{ template "backplane_operator" . }}
+        - name: OPERAND_IMAGE_HYPERSHIFT_ADDON_OPERATOR
+          value: {{ template "hypershift_addon_operator" . }}
+        - name: OPERAND_IMAGE_MANAGEDCLUSTER_IMPORT_CONTROLLER
+          value: {{ template "managedcluster_import_controller" . }}
+        - name: OPERAND_IMAGE_MULTICLOUD_MANAGER
+          value: {{ template "multicloud_manager" . }}
+        - name: OPERAND_IMAGE_PLACEMENT
+          value: {{ template "placement" . }}
+        - name: OPERAND_IMAGE_REGISTRATION
+          value: {{ template "registration" .}}
+        - name: OPERAND_IMAGE_REGISTRATION_OPERATOR
+          value: {{ template "registration_operator" . }}
+        - name: OPERAND_IMAGE_WORK
+          value: {{ template "work" . }}
+        - name: OPERATOR_VERSION
+          value: {{ .Chart.AppVersion }}
+        - name: OPERATOR_PACKAGE
+          value: multicluster-engine
+        - name: OPERATOR_CONDITION_NAME
+          value: multicluster-engine.v{{ .Chart.AppVersion }}
+        image: {{ template "backplane_operator" . }}
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 8081
+            scheme: HTTP
+          initialDelaySeconds: 15
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: backplane-operator
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /readyz
+            port: 8081
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 100m
+            memory: 2Gi
+          requests:
+            cpu: 100m
+            memory: 20Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          privileged: false
+          readOnlyRootFilesystem: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /tmp/k8s-webhook-server/serving-certs
+          name: cert
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccount: multicluster-engine-operator
+      serviceAccountName: multicluster-engine-operator
+      terminationGracePeriodSeconds: 10
+      volumes:
+      - name: cert
+        secret:
+          defaultMode: 420
+          secretName: multicluster-engine-operator-webhook
