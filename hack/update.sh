@@ -23,14 +23,14 @@ git clone --depth 1 --branch "release-$ACM_VERSION" https://github.com/stolostro
 
 for f in $CRD_FILES
 do
-    cp $f ./manifests/crds/
+    cp $f ./acm-addons/crds/
 done
 
 for f in $GRC_CMA_FILES
 do 
-    cp $f ./manifests/policy/clustermanagementaddons/
+    cp $f ./acm-addons/charts/grc/templates/
 done
 
 
-
 rm -rf multiclusterhub-operator
+

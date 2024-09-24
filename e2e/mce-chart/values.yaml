@@ -1,0 +1,19 @@
+
+replicaCount: 1
+images:
+  registry: "quay.io/stolostron"
+  tag: "2.7.0-BACKPLANE-2024-09-23-23-56-45"
+
+  # the components image name fromat is regisrtry/component:tag, the images.overrides can override the image if not empty. 
+  overrides:
+    backplane_operator: "quay.io/zhiweiyin/backplane-operator:v2.7.0"
+    registration_operator: ""
+    hypershift_addon_operator: ""
+    managedcluster_import_controller: ""
+    multicloud_manager: ""
+    addon_manager: ""
+    work: ""
+    registration: ""
+    placement: ""
+  imageCredentials:
+    dockerConfigJson: ""

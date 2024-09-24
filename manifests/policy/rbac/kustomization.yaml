@@ -1,9 +1,0 @@
-resources:
-- grc-clusterrole.yaml
-- grc-clusterrolebinding.yaml
-- grc-policy-addon-role.yaml
-- grc-policy-addon-rolebinding.yaml
-- grc-role.yaml
-- grc-rolebinding.yaml
-- policyaddon-clusterrole.yaml
-- policyaddon-clusterrolebinding.yaml

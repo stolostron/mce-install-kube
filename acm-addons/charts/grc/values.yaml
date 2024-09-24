@@ -1,0 +1,14 @@
+global:
+  registry: "quay.io/stolostron"
+  tag: ""
+  imageOverrides:
+    governance_policy_propagator: ""
+    governance_policy_addon_controller: ""
+    config_policy_controller: ""
+    governance_policy_framework_addon: ""
+ 
+  namespace: multicluster-engine
+
+hubconfig:
+  replicaCount: 1
+  
