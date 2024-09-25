@@ -15,16 +15,11 @@ The MCE operator is required to be installed on the Hub cluster.
 kubectl apply -f ./configuration/klusterletconfig.yaml
 ```
 
-2. Patch the `addonDeploymentConfig` for hypershift addon on non-OCP case.
+
+# Install Policy after MCE is installed
 
 ```
-kubectl apply -f ./configuration/addondeploymentconfig.yaml
-```
-
-# Install ACM addons after MCE is installed
-
-```
-helm install acm-addon ./acm-addons
+helm install acm-addon ./policy
 ```
 
 # Enable policy addon for local-cluster

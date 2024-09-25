@@ -24,8 +24,8 @@ update:
 install-mce: ensure-helm
 	$(HELM) install mce ./e2e/mce-chart
 
-install-acm-addons: ensure-helm
-	$(HELM) install acm-addons ./acm-addons
+install-policy: ensure-helm
+	$(HELM) install policy ./policy
 
 test-e2e:
 	hack/e2e.sh

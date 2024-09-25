@@ -55,6 +55,78 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: metadata.namespace
+        - name: OPERAND_IMAGE_APISERVER_NETWORK_PROXY
+          value: quay.io/stolostron/apiserver-network-proxy@sha256
+        - name: OPERAND_IMAGE_ASSISTED_IMAGE_SERVICE
+          value: quay.io/stolostron/assisted-image-service@sha256
+        - name: OPERAND_IMAGE_ASSISTED_INSTALLER
+          value: quay.io/stolostron/assisted-installer@sha256
+        - name: OPERAND_IMAGE_ASSISTED_INSTALLER_AGENT
+          value: quay.io/stolostron/assisted-installer-agent@sha256
+        - name: OPERAND_IMAGE_ASSISTED_INSTALLER_CONTROLLER
+          value: quay.io/stolostron/assisted-installer-controller@sha256
+        - name: OPERAND_IMAGE_ASSISTED_SERVICE_9
+          value: quay.io/stolostron/assisted-service@sha256
+        - name: OPERAND_IMAGE_ASSISTED_SERVICE_8
+          value: quay.io/stolostron/assisted-service-el8@sha256
+        - name: OPERAND_IMAGE_AWS_ENCRYPTION_PROVIDER
+          value: quay.io/stolostron/aws-encryption-provider@sha256
+        - name: OPERAND_IMAGE_BACKPLANE_MUST_GATHER
+          value: quay.io/stolostron/backplane-must-gather@sha256
+        - name: OPERAND_IMAGE_BACKPLANE_OPERATOR_TEST
+          value: quay.io/stolostron/backplane-operator-test@sha256
+        - name: OPERAND_IMAGE_CLUSTER_API
+          value: quay.io/stolostron/cluster-api@sha256
+        - name: OPERAND_IMAGE_CLUSTER_API_PROVIDER_AWS
+          value: quay.io/stolostron/cluster-api-aws-controller@sha256
+        - name: OPERAND_IMAGE_CLUSTER_API_PROVIDER_AGENT
+          value: quay.io/stolostron/cluster-api-provider-agent@sha256
+        - name: OPERAND_IMAGE_CLUSTER_API_PROVIDER_AZURE
+          value: quay.io/stolostron/cluster-api-provider-azure@sha256
+        - name: OPERAND_IMAGE_CLUSTER_API_PROVIDER_KUBEVIRT
+          value: quay.io/stolostron/cluster-api-provider-kubevirt@sha256
+        - name: OPERAND_IMAGE_CLUSTER_CURATOR_CONTROLLER
+          value: quay.io/stolostron/cluster-curator-controller@sha256
+        - name: OPERAND_IMAGE_CLUSTER_IMAGE_SET_CONTROLLER
+          value: quay.io/stolostron/cluster-image-set-controller@sha256
+        - name: OPERAND_IMAGE_CLUSTER_PROXY
+          value: quay.io/stolostron/cluster-proxy@sha256
+        - name: OPERAND_IMAGE_CLUSTER_PROXY_ADDON
+          value: quay.io/stolostron/cluster-proxy-addon@sha256
+        - name: OPERAND_IMAGE_CLUSTERCLAIMS_CONTROLLER
+          value: quay.io/stolostron/clusterclaims-controller@sha256
+        - name: OPERAND_IMAGE_CLUSTERLIFECYCLE_STATE_METRICS
+          value: quay.io/stolostron/clusterlifecycle-state-metrics@sha256
+        - name: OPERAND_IMAGE_CONSOLE_MCE
+          value: quay.io/stolostron/console-mce@sha256
+        - name: OPERAND_IMAGE_DISCOVERY_OPERATOR
+          value: quay.io/stolostron/discovery-operator@sha256
+        - name: OPERAND_IMAGE_DISCOVERY_OPERATOR_TESTS
+          value: quay.io/stolostron/discovery-operator-tests@sha256
+        - name: OPERAND_IMAGE_DISCOVERY_TESTSERVER
+          value: quay.io/stolostron/discovery-testserver@sha256
+        - name: OPERAND_IMAGE_FOUNDATION_E2E
+          value: quay.io/stolostron/foundation-e2e@sha256
+        - name: OPERAND_IMAGE_HELLOPROW_GO
+          value: quay.io/stolostron/helloprow-go@sha256
+        - name: OPERAND_IMAGE_HELLOWORLD
+          value: quay.io/stolostron/helloworld@sha256
+        - name: OPERAND_IMAGE_OPENSHIFT_HIVE
+          value: quay.io/stolostron/hive@sha256
+        - name: OPERAND_IMAGE_HYPERSHIFT_ADDON_OPERATOR_CANARY_TEST
+          value: quay.io/stolostron/hypershift-addon-operator-canary-test@sha256
+        - name: OPERAND_IMAGE_HYPERSHIFT_OPERATOR
+          value: quay.io/stolostron/hypershift-operator@sha256
+        - name: OPERAND_IMAGE_IMAGE_BASED_INSTALL_OPERATOR
+          value: quay.io/stolostron/image-based-install-operator@sha256
+        - name: OPERAND_IMAGE_MANAGED_SERVICEACCOUNT
+          value: quay.io/stolostron/managed-serviceaccount@sha256
+        - name: OPERAND_IMAGE_MANAGED_SERVICEACCOUNT_E2E
+          value: quay.io/stolostron/managed-serviceaccount-e2e@sha256
+        - name: OPERAND_IMAGE_POSTGRESQL_12
+          value: quay.io/stolostron/postgresql-12-centos7@sha256
+        - name: OPERAND_IMAGE_PROVIDER_CREDENTIAL_CONTROLLER
+          value: quay.io/stolostron/provider-credential-controller@sha256
         - name: OPERAND_IMAGE_ADDON_MANAGER
           value: {{ template "addon_manager" . }}
         - name: OPERAND_IMAGE_BACKPLANE_OPERATOR
@@ -73,6 +145,8 @@ spec:
           value: {{ template "registration_operator" . }}
         - name: OPERAND_IMAGE_WORK
           value: {{ template "work" . }}
+        - name: OPERAND_IMAGE_KUBE_RBAC_PROXY_MCE
+          value: {{ template "kube_rbac_proxy_mce" . }}
         - name: OPERATOR_VERSION
           value: {{ .Chart.AppVersion }}
         - name: OPERATOR_PACKAGE

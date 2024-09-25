@@ -48,15 +48,6 @@ echo "###### Wait unitl cluster-manager is created ######"
 waitForReady "kubectl get clustermanagers.operator.open-cluster-management.io  | grep -c \"cluster-manager\"" 1
 
 echo ""
-echo "###### Wait unitl local-cluster is created ######"
-waitForReady "kubectl get mcl  | grep -c \"local-cluster\"" 1
-
-echo ""
-echo "###### Wait unitl MCE CR is Available ######"
-# TODO: set to 1 after MCE can be Available 
-waitForReady "kubectl get mce multiclusterengine | grep -c \"Available\"" 0
-
-echo ""
 echo "#### Configure MCE ####"
 
 echo ""
@@ -69,26 +60,25 @@ echo "###### Create global klusterletconfig ######"
 kubectl apply -f ./configuration/klusterletconfig.yaml
 
 echo ""
-echo "###### Wait until addondeploymentconfigs CRD is installed ######"
-waitForReady "kubectl get crds | grep -c \"addondeploymentconfigs\"" 1
-
-echo ""
-echo "###### Patch addondeploymentconfig for hypershift addon ######"
-kubectl apply -f configuration/addondeploymentconfig.yaml
+echo "###### Wait unitl local-cluster is created ######"
+waitForReady "kubectl get mcl  | grep -c \"local-cluster\"" 1
 
 
 echo ""
-echo "#### Install ACM addons #####"
-make install-acm-addons
+echo "###### Wait unitl MCE CR is Available ######"
+waitForReady "kubectl get mce multiclusterengine | grep -c \"Available\""  1
 
 echo ""
-echo "###### Enable policy for local-cluster ######"
+echo "#### Install Policy addons #####"
+make install-policy
+
+echo ""
+echo "###### Enable policy addons for local-cluster ######"
 kubectl apply -f ./configuration/klusterletaddonconfig.yaml
 
 echo ""
 echo "###### Wait unitl 4 addons in local-cluster is Available ######"
-# TODO: set to 4 after hypershift addon is Available.
-waitForReady "kubectl get mca -n local-cluster | grep -c \"True\"" 3
+waitForReady "kubectl get mca -n local-cluster | grep -c \"True\"" 4
 
 echo ""
 echo "!!!!!!!!!! MCE + policy is installed succussfully !!!!!!!!!!!!"
