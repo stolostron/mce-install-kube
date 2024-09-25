@@ -101,3 +101,13 @@
 {{- end }}
 {{- end }}
 {{- end }}
+
+{{- define "kube_rbac_proxy_mce" }}
+{{- with .Values.images }}
+{{- if .overrides.kube_rbac_proxy_mce }}
+{{- printf "%s" .overrides.kube_rbac_proxy_mce }}
+{{- else }}
+{{- printf "%s/kube-rbac-proxy-mce:%s" .registry .tag }}
+{{- end }}
+{{- end }}
+{{- end }}
