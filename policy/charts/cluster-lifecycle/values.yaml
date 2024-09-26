@@ -1,6 +1,4 @@
 global:
-  registry: "quay.io/stolostron"
-  tag: ""
   imageOverrides:
     klusterlet_addon_controller: ""
 
