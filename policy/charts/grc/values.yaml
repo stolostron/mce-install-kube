@@ -1,6 +1,4 @@
 global:
-  registry: "quay.io/stolostron"
-  tag: ""
   imageOverrides:
     governance_policy_propagator: ""
     governance_policy_addon_controller: ""

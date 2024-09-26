@@ -1,20 +1,30 @@
 
 replicaCount: 1
 images:
-  registry: "quay.io/stolostron"
-  tag: "2.12.0-SNAPSHOT-2024-09-24-23-38-54"
 
-  # the components image name fromat is regisrtry/component:tag, the images.overrides can override the image if not empty. 
   overrides:
-    backplane_operator: ""
-    registration_operator: ""
-    hypershift_addon_operator: ""
-    managedcluster_import_controller: ""
-    multicloud_manager: ""
-    addon_manager: ""
-    work: ""
-    registration: ""
-    placement: ""
-    kube_rbac_proxy_mce: ""
+    backplane_operator: "quay.io/stolostron/backplane-operator:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
+    registration_operator: "quay.io/stolostron/registration-operator:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
+    hypershift_addon_operator: "quay.io/stolostron/hypershift-addon-operator:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
+    managedcluster_import_controller: "quay.io/stolostron/managedcluster-import-controller:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
+    multicloud_manager: "quay.io/stolostron/multicloud-manager:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
+    addon_manager: "quay.io/stolostron/addon-manager:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
+    work: "quay.io/stolostron/work:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
+    registration: "quay.io/stolostron/registration:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
+    placement: "quay.io/stolostron/placement:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
+    kube_rbac_proxy_mce: "quay.io/stolostron/kube-rbac-proxy-mce:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
+
+
+    #images in MCE 2.6.2
+    # backplane_operator: "registry.redhat.io/multicluster-engine/backplane-rhel9-operator@sha256:eb15286f728e32851b426f86b3a1ce5ed186cdb1a67287e98ff5925dc558a2a9"
+    # registration_operator: "registry.redhat.io/multicluster-engine/registration-operator-rhel9@sha256:efe0091dd6d389190c0acf47cb8980ed8ba7d90bdf04b3b2e9dc07926c0d0bca"
+    # hypershift_addon_operator: "registry.redhat.io/multicluster-engine/hypershift-addon-rhel9-operator@sha256:7b375b10a5f6434aad3801e486e51a9404d88899a84593686856f3340a5889fa"
+    # managedcluster_import_controller: "registry.redhat.io/multicluster-engine/managedcluster-import-controller-rhel9@sha256:89dea3fa0cc7cb182d49436bb93214af73bac1383caa59766c97b6fdad2b14b5"
+    # multicloud_manager: "registry.redhat.io/multicluster-engine/multicloud-manager-rhel9@sha256:089188b25407a49ba042bd65a8afc6a6c86d68b8d7ac3da722196f0cd85383ae"
+    # addon_manager: "registry.redhat.io/multicluster-engine/addon-manager-rhel9@sha256:93b21a4356230da6f70edac4d8770b5e0af2f40a37ec454b00b12b5aa76fb4c3"
+    # work: "registry.redhat.io/multicluster-engine/work-rhel9@sha256:bf6c7384283046093605659e866ed6a4e2c7c81690f5180894099d4691b97aa3"
+    # registration: "registry.redhat.io/multicluster-engine/registration-rhel9@sha256:e05fe0fb10bd9abd3f653fc01ea25dab0e78b3dbe932b2da3375585dffc7f4b6"
+    # placement: "registry.redhat.io/multicluster-engine/placement-rhel9@sha256:307b984b4315b9e22c520be893c2522d4bf3090cd90b10ba1aefb740bc7b7cc2"
+    # kube_rbac_proxy_mce: "registry.redhat.io/multicluster-engine/kube-rbac-proxy-mce-rhel9@sha256:b5f6f36487e70b543afacd33255b0c4f504bbd62bd5b7f46648c098db4466393"
   imageCredentials:
     dockerConfigJson: ""

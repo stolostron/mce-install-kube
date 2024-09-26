@@ -27,7 +27,7 @@ install-mce: ensure-helm
 install-policy: ensure-helm
 	$(HELM) install policy ./policy
 
-test-e2e:
+test-e2e: 
 	hack/e2e.sh
 
 ensure-helm:

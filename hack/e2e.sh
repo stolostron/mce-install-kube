@@ -17,7 +17,8 @@ function waitForReady() {
             echo "Timeout waiting for the result of cmd. "
         
             kubectl get pods -A
-            kubectl get mce
+            kubectl get mcl
+            kubectl get mce multiclusterengine -o yaml
   
             exit 1
         fi

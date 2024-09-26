@@ -19,7 +19,7 @@ kubectl apply -f ./configuration/klusterletconfig.yaml
 # Install Policy after MCE is installed
 
 ```
-helm install acm-addon ./policy
+helm install policy ./policy
 ```
 
 # Enable policy addon for local-cluster

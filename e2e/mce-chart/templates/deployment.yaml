@@ -128,32 +128,32 @@ spec:
         - name: OPERAND_IMAGE_PROVIDER_CREDENTIAL_CONTROLLER
           value: quay.io/stolostron/provider-credential-controller@sha256
         - name: OPERAND_IMAGE_ADDON_MANAGER
-          value: {{ template "addon_manager" . }}
+          value: {{ .Values.images.overrides.addon_manager }}
         - name: OPERAND_IMAGE_BACKPLANE_OPERATOR
-          value: {{ template "backplane_operator" . }}
+          value: {{ .Values.images.overrides.backplane_operator }}
         - name: OPERAND_IMAGE_HYPERSHIFT_ADDON_OPERATOR
-          value: {{ template "hypershift_addon_operator" . }}
+          value: {{ .Values.images.overrides.hypershift_addon_operator }}
         - name: OPERAND_IMAGE_MANAGEDCLUSTER_IMPORT_CONTROLLER
-          value: {{ template "managedcluster_import_controller" . }}
+          value: {{ .Values.images.overrides.managedcluster_import_controller }}
         - name: OPERAND_IMAGE_MULTICLOUD_MANAGER
-          value: {{ template "multicloud_manager" . }}
+          value: {{ .Values.images.overrides.multicloud_manager }}
         - name: OPERAND_IMAGE_PLACEMENT
-          value: {{ template "placement" . }}
+          value: {{ .Values.images.overrides.placement }}
         - name: OPERAND_IMAGE_REGISTRATION
-          value: {{ template "registration" .}}
+          value: {{ .Values.images.overrides.registration }}
         - name: OPERAND_IMAGE_REGISTRATION_OPERATOR
-          value: {{ template "registration_operator" . }}
+          value: {{ .Values.images.overrides.registration_operator }}
         - name: OPERAND_IMAGE_WORK
-          value: {{ template "work" . }}
+          value: {{ .Values.images.overrides.work }}
         - name: OPERAND_IMAGE_KUBE_RBAC_PROXY_MCE
-          value: {{ template "kube_rbac_proxy_mce" . }}
+          value: {{ .Values.images.overrides.kube_rbac_proxy_mce }}
         - name: OPERATOR_VERSION
           value: {{ .Chart.AppVersion }}
         - name: OPERATOR_PACKAGE
           value: multicluster-engine
         - name: OPERATOR_CONDITION_NAME
           value: multicluster-engine.v{{ .Chart.AppVersion }}
-        image: {{ template "backplane_operator" . }}
+        image: {{ .Values.images.overrides.backplane_operator }}
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
