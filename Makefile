@@ -1,4 +1,12 @@
 export ACM_VERSION?=2.12
+export MCE_VERSION?=2.7
+
+SED_CMD:=sed
+ifeq ($(GOHOSTOS),darwin)
+	SED_CMD:=gsed
+endif
+
+export SED=$(SED_CMD)
 
 HELM?=_output/bin/helm
 HELM_VERSION?=v3.14.0
