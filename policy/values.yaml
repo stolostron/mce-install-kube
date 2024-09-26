@@ -14,7 +14,7 @@ global:
     # governance_policy_framework_addon: "registry.redhat.io/rhacm2/acm-governance-policy-framework-addon-rhel9@sha256:a4880f6e82d2b82606203ea855d0418bb29b3d4535f8bc7a9ef4074258c18674"
     # klusterlet_addon_controller: "registry.redhat.io/rhacm2/klusterlet-addon-controller-rhel9@sha256:478e3e6cda0d74f43b0f05911d023344108a5cd79d57d5cc9f268ad064848a00"
   namespace: multicluster-engine
-
+  pullSecret: open-cluster-management-image-pull-credentials
 grc:
   hubconfig:
     replicaCount: 2

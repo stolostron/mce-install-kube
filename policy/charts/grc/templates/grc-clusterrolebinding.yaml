@@ -1,13 +1,17 @@
+# Copyright (c) 2020 Red Hat, Inc.
+
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: open-cluster-management:grc:clusterrolebinding
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: open-cluster-management:grc:clusterrole
-subjects:
-- kind: ServiceAccount
-  name: grc-sa
+  name: {{ .Values.org }}:grc:clusterrolebinding
   namespace: {{ .Values.global.namespace }}
-  
+  labels:
+    app: grc
+roleRef:
+  kind: ClusterRole
+  name: {{ .Values.org }}:grc:clusterrole
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: grc-sa
+    namespace: {{ .Values.global.namespace }}

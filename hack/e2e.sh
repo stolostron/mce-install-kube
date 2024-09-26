@@ -29,7 +29,7 @@ function waitForReady() {
             break
         fi
         
-        echo "failed, expected $rst, but got $result, re-try after 5 seconds."
+        echo "expected $rst, but got $result, re-try after 5 seconds..."
         sleep 5
         (( SECOND = SECOND + 5 ))
     done

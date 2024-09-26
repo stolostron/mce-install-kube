@@ -3,6 +3,8 @@ kind: Role
 metadata:
   name: grc-grc-policy-addon-role
   namespace: {{ .Values.global.namespace }}
+  labels:
+    app: grc
 rules:
 - apiGroups:
   - ""

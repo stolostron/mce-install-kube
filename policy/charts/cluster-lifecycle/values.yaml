@@ -1,8 +1,14 @@
 global:
   imageOverrides:
-    klusterlet_addon_controller: ""
-
-  namespace: multicluster-engine
-
+    klusterlet_addon_controller: ''
+  templateOverrides: {}
+  namespace: ''
+  pullSecret: null
+  imageRepository: ''
+  hubSize: Small
 hubconfig:
+  nodeSelector: null
+  proxyConfigs: {}
   replicaCount: 1
+  tolerations: []
+org: open-cluster-management
