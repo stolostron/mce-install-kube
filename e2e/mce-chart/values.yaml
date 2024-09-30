@@ -3,16 +3,16 @@ replicaCount: 1
 images:
 
   overrides:
-    backplane_operator: "quay.io/stolostron/backplane-operator:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
-    registration_operator: "quay.io/stolostron/registration-operator:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
-    hypershift_addon_operator: "quay.io/stolostron/hypershift-addon-operator:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
-    managedcluster_import_controller: "quay.io/stolostron/managedcluster-import-controller:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
-    multicloud_manager: "quay.io/stolostron/multicloud-manager:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
-    addon_manager: "quay.io/stolostron/addon-manager:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
-    work: "quay.io/stolostron/work:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
-    registration: "quay.io/stolostron/registration:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
-    placement: "quay.io/stolostron/placement:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
-    kube_rbac_proxy_mce: "quay.io/stolostron/kube-rbac-proxy-mce:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
+    backplane_operator: "quay.io/stolostron/backplane-operator:2.7.0-BACKPLANE-2024-09-30-05-39-18"
+    registration_operator: "quay.io/stolostron/registration-operator:2.7.0-BACKPLANE-2024-09-30-05-39-18"
+    hypershift_addon_operator: "quay.io/stolostron/hypershift-addon-operator:2.7.0-BACKPLANE-2024-09-30-05-39-18"
+    managedcluster_import_controller: "quay.io/stolostron/managedcluster-import-controller:2.7.0-BACKPLANE-2024-09-30-05-39-18"
+    multicloud_manager: "quay.io/stolostron/multicloud-manager:2.7.0-BACKPLANE-2024-09-30-05-39-18"
+    addon_manager: "quay.io/stolostron/addon-manager:2.7.0-BACKPLANE-2024-09-30-05-39-18"
+    work: "quay.io/stolostron/work:2.7.0-BACKPLANE-2024-09-30-05-39-18"
+    registration: "quay.io/stolostron/registration:2.7.0-BACKPLANE-2024-09-30-05-39-18"
+    placement: "quay.io/stolostron/placement:2.7.0-BACKPLANE-2024-09-30-05-39-18"
+    kube_rbac_proxy_mce: "quay.io/stolostron/kube-rbac-proxy-mce:2.7.0-BACKPLANE-2024-09-30-05-39-18"
 
 
     #images in MCE 2.6.2

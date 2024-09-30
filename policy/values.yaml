@@ -1,11 +1,11 @@
 global:
   imageOverrides:
     # upstream images
-    governance_policy_propagator: "quay.io/stolostron/governance-policy-propagator:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
-    governance_policy_addon_controller: "quay.io/stolostron/governance-policy-addon-controller:2.12.0-SNAPSHOT-2024-09-24-23-38-54" 
-    config_policy_controller: "quay.io/stolostron/config-policy-controller:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
-    governance_policy_framework_addon: "quay.io/stolostron/governance-policy-framework-addon:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
-    klusterlet_addon_controller: "quay.io/stolostron/klusterlet-addon-controller:2.12.0-SNAPSHOT-2024-09-24-23-38-54"
+    governance_policy_propagator: "quay.io/stolostron/governance-policy-propagator:2.12.0-SNAPSHOT-2024-09-30-01-46-06"
+    governance_policy_addon_controller: "quay.io/stolostron/governance-policy-addon-controller:2.12.0-SNAPSHOT-2024-09-30-01-46-06" 
+    config_policy_controller: "quay.io/stolostron/config-policy-controller:2.12.0-SNAPSHOT-2024-09-30-01-46-06"
+    governance_policy_framework_addon: "quay.io/stolostron/governance-policy-framework-addon:2.12.0-SNAPSHOT-2024-09-30-01-46-06"
+    klusterlet_addon_controller: "quay.io/stolostron/klusterlet-addon-controller:2.12.0-SNAPSHOT-2024-09-30-01-46-06"
  
     # images in ACM 2.11.2
     # governance_policy_propagator: "registry.redhat.io/rhacm2/governance-policy-propagator-rhel9@sha256:af848e7e31d8ec9b5ad1896a5d5ccc67f320a7740245c190ba8a76757984e65b"
