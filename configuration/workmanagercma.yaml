@@ -1,0 +1,23 @@
+apiVersion: addon.open-cluster-management.io/v1alpha1
+kind: ClusterManagementAddOn
+metadata:
+  annotations:
+    addon.open-cluster-management.io/lifecycle: addon-manager
+  name: work-manager
+spec:
+  addOnMeta:
+    description: work-manager provides action, view and rbac settings
+    displayName: work-manager
+  installStrategy:
+    placements:
+    - name: global
+      namespace: open-cluster-management-global-set
+      rolloutStrategy:
+        type: All
+    type: Placements
+  supportedConfigs:
+  - defaultConfig:
+      name: addon-hosted-config
+      namespace: multicluster-engine
+    group: addon.open-cluster-management.io
+    resource: addondeploymentconfigs
