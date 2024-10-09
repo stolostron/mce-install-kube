@@ -70,6 +70,11 @@ echo "###### Wait unitl MCE CR is Available ######"
 waitForReady "kubectl get mce multiclusterengine | grep -c \"Available\""  1
 
 echo ""
+echo "###### create addonhostedconfig ######"
+kubectl apply -f ./configuration/addonhostedconfig.yaml
+
+
+echo ""
 echo "#### Install Policy addons #####"
 make install-policy
 

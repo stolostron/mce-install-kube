@@ -15,10 +15,8 @@ global:
     # klusterlet_addon_controller: "registry.redhat.io/rhacm2/klusterlet-addon-controller-rhel9@sha256:478e3e6cda0d74f43b0f05911d023344108a5cd79d57d5cc9f268ad064848a00"
   namespace: multicluster-engine
   pullSecret: open-cluster-management-image-pull-credentials
-grc:
-  hubconfig:
-    replicaCount: 2
-    
-cluster-lifecycle:
-  hubconfig:
-    replicaCount: 2
+  
+  cma:
+    defaultConfig:
+      name: addon-hosted-config
+      namespace: multicluster-engine
