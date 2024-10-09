@@ -1,0 +1,5 @@
+apiVersion: v2
+name: clusterlifecycle-state-metrics
+description: A Helm chart for clusterlifecycle-state-metrics
+version: 2.7.0
+appVersion: 2.7.0
