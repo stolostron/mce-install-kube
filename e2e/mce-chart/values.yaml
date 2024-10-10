@@ -3,7 +3,7 @@ replicaCount: 1
 images:
 
   overrides:
-    backplane_operator: "quay.io/stolostron/backplane-operator:2.7.0-BACKPLANE-2024-09-30-05-39-18"
+    backplane_operator: "quay.io/zhiweiyin/backplane-operator:metric"
     registration_operator: "quay.io/stolostron/registration-operator:2.7.0-BACKPLANE-2024-09-30-05-39-18"
     hypershift_addon_operator: "quay.io/stolostron/hypershift-addon-operator:2.7.0-BACKPLANE-2024-09-30-05-39-18"
     managedcluster_import_controller: "quay.io/stolostron/managedcluster-import-controller:2.7.0-BACKPLANE-2024-09-30-05-39-18"
@@ -13,6 +13,7 @@ images:
     registration: "quay.io/stolostron/registration:2.7.0-BACKPLANE-2024-09-30-05-39-18"
     placement: "quay.io/stolostron/placement:2.7.0-BACKPLANE-2024-09-30-05-39-18"
     kube_rbac_proxy_mce: "quay.io/stolostron/kube-rbac-proxy-mce:2.7.0-BACKPLANE-2024-09-30-05-39-18"
+    clusterlifecycle_state_metrics: "quay.io/zhiweiyin/test:clusterlifecycle-state-metrics"
 
 
     #images in MCE 2.6.2
