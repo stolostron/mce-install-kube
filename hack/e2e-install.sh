@@ -4,6 +4,10 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
+# env
+export HELM=_output/bin/helm
+# export KUBECONFIG=kubeconfig
+
 function waitForReady() {
     FOUND=1
     SECOND=0
@@ -37,8 +41,10 @@ function waitForReady() {
 
 
 echo ""
-echo "#### Install MCE ####"
-make install-mce
+echo "#### Install MCE on Hub cluster ####"
+make ensure-helm
+$HELM install mce ./e2e/mce-chart -f ./e2e/configuration/mce-values.yaml
+
 
 echo ""
 echo "###### Wait until MCE pod is running ######"
@@ -57,12 +63,11 @@ waitForReady "kubectl get crds | grep -c \"klusterletconfigs\"" 1
 
 echo ""
 echo "###### Create global klusterletconfig ######"
-# set hub api server to ./configuration/klusterletconfig.yaml
-kubectl apply -f ./configuration/klusterletconfig.yaml
+kubectl apply -f ./e2e/configuration/klusterletconfig.yaml
 
 echo ""
 echo "###### Wait unitl local-cluster is created ######"
-waitForReady "kubectl get mcl  | grep -c \"local-cluster\"" 1
+waitForReady "kubectl get mcl local-cluster | grep -c \"True\"" 1
 
 
 echo ""
@@ -73,10 +78,16 @@ echo ""
 echo "###### create addonhostedconfig ######"
 kubectl apply -f ./configuration/addonhostedconfig.yaml
 
+echo ""
+echo "###### patch clustermanagementaddon work-manager ######"
+#kubectl patch clustermanagementaddon work-manager --type merge -p '{"spec":{"supportedConfigs":[{"defaultConfig":{"name":"addon-hosted-config","namespace":"multicluster-engine"},"group":"addon.open-cluster-management.io","resource":"addondeploymentconfigs"}]}}'
+kubectl apply -f ./configuration/workmanagercma.yaml
 
 echo ""
 echo "#### Install Policy addons #####"
-make install-policy
+make ensure-helm
+$HELM install policy ./policy -f ./e2e/configuration/policy-values.yaml
+
 
 echo ""
 echo "###### Enable policy addons for local-cluster ######"
