@@ -3,7 +3,7 @@ kind: MultiClusterEngine
 metadata:
   name: multiclusterengine
 spec:
-  availabilityConfig: {{ .Values.availabilityConfig }}
+  availabilityConfig: Basic
   imagePullSecret: open-cluster-management-image-pull-credentials
   overrides:
     components:

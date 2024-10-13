@@ -35,8 +35,11 @@ install-mce: ensure-helm
 install-policy: ensure-helm
 	$(HELM) install policy ./policy
 
-test-e2e: 
-	hack/e2e.sh
+e2e-install:
+	hack/e2e-install.sh 
+
+e2e-import-cluster: 
+	hack/e2e-import-cluster.sh
 
 ensure-helm:
 ifeq "" "$(wildcard $(HELM))"

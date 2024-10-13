@@ -28,19 +28,48 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: ${{ env.GO_VERSION }}
-      - name: Setup kind
-        uses: engineerd/setup-kind@v0.5.0
+      - name: Install kind
+        uses: helm/kind-action@v1.10.0
         with:
           version: v0.22.0
-          skipClusterCreation: ${{ env.USE_EXISTING_CLUSTER }}
-      - name: Set KUBECONFIG
+          install_only: true
+      - name: Test kind works and there is no cluster started
+        run: |
+          [[ $(kind get clusters | wc -l) -eq 0 ]]
+      - name: Set KUBECONFIG dir
         run: |
           mkdir -p /home/runner/.kube
-          kind get kubeconfig > /home/runner/.kube/config
-        if: ${{ env.USE_EXISTING_CLUSTER }}
-      - name: Test E2E
+      - name: Create Hub cluster
         run: |
-          make test-e2e
+          kind create cluster --name hub
         env:
-          KUBECONFIG: /home/runner/.kube/config
-  
+          KUBECONFIG: /home/runner/.kube/hub-kubeconfig      
+      - name: Create Spoke cluster
+        run: |
+          kind create cluster --name spoke
+        env:
+          KUBECONFIG: /home/runner/.kube/spoke-kubeconfig                     
+      - name: Test Hub and Spoke clusters
+        run: |
+          kubectl cluster-info --kubeconfig /home/runner/.kube/hub-kubeconfig 
+          kubectl get pods -A --kubeconfig /home/runner/.kube/hub-kubeconfig 
+          kubectl cluster-info --kubeconfig /home/runner/.kube/spoke-kubeconfig 
+          kubectl get pods -A --kubeconfig /home/runner/.kube/spoke-kubeconfig 
+      - name: Create internal kubeconfigs
+        run: |
+          kind get kubeconfig --internal --name hub > /home/runner/.kube/hub-internal-kubeconfig 
+          kind get kubeconfig --internal --name spoke > /home/runner/.kube/spoke-internal-kubeconfig 
+      - name: Install MCE+Policy
+        run: |
+          make e2e-install
+        env:
+          KUBECONFIG: /home/runner/.kube/hub-kubeconfig 
+
+      - name: Import hosted cluster
+        run: |
+          make e2e-import-cluster
+        env:
+          KUBECONFIG: /home/runner/.kube/hub-kubeconfig 
+          MANAGED_CLUSTER_NAME: spoke
+          MANAGED_KUBECONFIG: /home/runner/.kube/spoke-internal-kubeconfig 
+          EXTERNAL_MANAGED_KUBECONFIG: /home/runner/.kube/spoke-internal-kubeconfig 

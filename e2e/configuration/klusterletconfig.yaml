@@ -3,4 +3,4 @@ kind: KlusterletConfig
 metadata:
   name: global
 spec:
-  hubKubeAPIServerURL: "hub cluster api server url"
+  hubKubeAPIServerURL: "https://hub-control-plane:6443"
