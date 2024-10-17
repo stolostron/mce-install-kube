@@ -13,7 +13,7 @@ HELM_VERSION?=v3.14.0
 helm_gen_dir:=$(dir $(HELM))
 
 
-HELM_ARCHOS:=linux-amd64
+HELM_ARCHOS:=$(shell uname -s | tr '[:upper:]' '[:lower:]')-$(shell uname -m)
 ifeq ($(GOHOSTOS),darwin)
 	ifeq ($(GOHOSTARCH),amd64)
 		OPERATOR_SDK_ARCHOS:=darwin_amd64
@@ -26,19 +26,19 @@ ifeq ($(GOHOSTOS),darwin)
 endif
 
 
-update:	
+update:
 	hack/update.sh
 
 install-mce: ensure-helm
-	$(HELM) install mce ./e2e/mce-chart
+	$(HELM) upgrade --install mce ./e2e/mce-chart
 
 install-policy: ensure-helm
-	$(HELM) install policy ./policy
+	$(HELM) upgrade --install policy ./policy
 
 e2e-install:
-	hack/e2e-install.sh 
+	hack/e2e-install.sh
 
-e2e-import-cluster: 
+e2e-import-cluster:
 	hack/e2e-import-cluster.sh
 
 ensure-helm:
