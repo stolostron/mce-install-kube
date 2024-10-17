@@ -45,10 +45,7 @@ ensure-helm:
 ifeq "" "$(wildcard $(HELM))"
 	$(info Installing helm into '$(HELM)')
 	mkdir -p '$(helm_gen_dir)'
-	curl -s -f -L https://get.helm.sh/helm-$(HELM_VERSION)-$(HELM_ARCHOS).tar.gz -o '$(helm_gen_dir)$(HELM_VERSION)-$(HELM_ARCHOS).tar.gz'
-	tar -zvxf '$(helm_gen_dir)/$(HELM_VERSION)-$(HELM_ARCHOS).tar.gz' -C $(helm_gen_dir)
-	mv $(helm_gen_dir)/$(HELM_ARCHOS)/helm $(HELM)
-	rm -rf $(helm_gen_dir)/$(HELM_ARCHOS)
+	HELM_INSTALL_DIR=${helm_gen_dir} hack/get-helm.sh --version $(HELM_VERSION) --no-sudo
 	chmod +x '$(HELM)';
 else
 	$(info Using existing helm from "$(HELM)")
