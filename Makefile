@@ -13,7 +13,7 @@ HELM_VERSION?=v3.14.0
 helm_gen_dir:=$(dir $(HELM))
 
 
-HELM_ARCHOS:=linux-amd64
+HELM_ARCHOS:=$(shell uname -s | tr '[:upper:]' '[:lower:]')-$(shell uname -m)
 ifeq ($(GOHOSTOS),darwin)
 	ifeq ($(GOHOSTARCH),amd64)
 		OPERATOR_SDK_ARCHOS:=darwin_amd64
@@ -26,29 +26,26 @@ ifeq ($(GOHOSTOS),darwin)
 endif
 
 
-update:	
+update:
 	hack/update.sh
 
 install-mce: ensure-helm
-	$(HELM) install mce ./e2e/mce-chart
+	$(HELM) upgrade --install mce ./e2e/mce-chart
 
 install-policy: ensure-helm
-	$(HELM) install policy ./policy
+	$(HELM) upgrade --install policy ./policy
 
 e2e-install:
-	hack/e2e-install.sh 
+	hack/e2e-install.sh
 
-e2e-import-cluster: 
+e2e-import-cluster:
 	hack/e2e-import-cluster.sh
 
 ensure-helm:
 ifeq "" "$(wildcard $(HELM))"
 	$(info Installing helm into '$(HELM)')
 	mkdir -p '$(helm_gen_dir)'
-	curl -s -f -L https://get.helm.sh/helm-$(HELM_VERSION)-$(HELM_ARCHOS).tar.gz -o '$(helm_gen_dir)$(HELM_VERSION)-$(HELM_ARCHOS).tar.gz'
-	tar -zvxf '$(helm_gen_dir)/$(HELM_VERSION)-$(HELM_ARCHOS).tar.gz' -C $(helm_gen_dir)
-	mv $(helm_gen_dir)/$(HELM_ARCHOS)/helm $(HELM)
-	rm -rf $(helm_gen_dir)/$(HELM_ARCHOS)
+	HELM_INSTALL_DIR=${helm_gen_dir} hack/get-helm.sh --version $(HELM_VERSION) --no-sudo
 	chmod +x '$(HELM)';
 else
 	$(info Using existing helm from "$(HELM)")
