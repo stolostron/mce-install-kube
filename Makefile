@@ -1,6 +1,8 @@
 export ACM_VERSION?=2.12
 export MCE_VERSION?=2.7
 
+GOHOSTOS:=$(shell uname -s | tr '[:upper:]' '[:lower:]')
+
 SED_CMD:=sed
 ifeq ($(GOHOSTOS),darwin)
 	SED_CMD:=gsed
