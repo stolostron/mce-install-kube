@@ -28,9 +28,9 @@ done
 #cp ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/Chart.yaml ./policy/charts/grc/
 #cp ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/values.yaml ./policy/charts/grc/
 
-GRC_FILES="./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/config-policy-clustermanagementaddon.yaml
-./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/governance-policy-framework-clustermanagementaddon.yaml
-"
+# GRC_FILES="./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/config-policy-clustermanagementaddon.yaml
+# ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/governance-policy-framework-clustermanagementaddon.yaml
+# "
 # ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/grc-clusterrole.yaml
 # ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/grc-clusterrolebinding.yaml
 # ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/grc-policy-addon-role.yaml
@@ -44,10 +44,10 @@ GRC_FILES="./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/
 # "
 
 
-for f in $GRC_FILES
-do 
-    cp $f ./policy/charts/grc/templates/
-done
+# for f in $GRC_FILES
+# do 
+#     cp $f ./policy/charts/grc/templates/
+# done
 
 # update cluster-lifecycle sub-chart
 #cp ./multiclusterhub-operator/pkg/templates/charts/toggle/cluster-lifecycle/Chart.yaml ./policy/charts/cluster-lifecycle/

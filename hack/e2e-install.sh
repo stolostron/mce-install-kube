@@ -43,6 +43,11 @@ function waitForReady() {
 echo ""
 echo "#### Install MCE on Hub cluster ####"
 make ensure-helm
+
+# install released mce
+# helm install mce ./e2e/mce-chart --set-file images.imageCredentials.dockerConfigJson=pullsecret.json
+
+# install upstream mce 
 $HELM install mce ./e2e/mce-chart -f ./e2e/configuration/mce-values.yaml
 
 
