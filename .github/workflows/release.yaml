@@ -54,4 +54,4 @@ jobs:
           draft: true
           generate_release_notes: true
           files: |
-            /home/runner/work/mce-install-kube/*.tgz
+            /home/runner/work/mce-install-kube/mce-install-kube/*.tgz
