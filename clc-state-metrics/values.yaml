@@ -1,6 +1,6 @@
 global:
   imageOverrides:
-    clusterlifecycle_state_metrics: quay.io/stolostron/clusterlifecycle-state-metrics:2.12.0-SNAPSHOT-2024-10-09-13-50-28
+    clusterlifecycle_state_metrics: registry.redhat.io/multicluster-engine/clusterlifecycle-state-metrics-rhel9@sha256:bf5bb514e4d8af5e38317c3727d4cd9f90c22b293fe3e2367f9f0e179e0ee0c7
   templateOverrides: {}
   pullSecret: open-cluster-management-image-pull-credentials
   namespace: multicluster-engine
