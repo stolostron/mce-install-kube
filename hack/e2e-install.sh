@@ -45,10 +45,10 @@ echo "#### Install MCE on Hub cluster ####"
 make ensure-helm
 
 # install released mce
-# helm install mce ./e2e/mce-chart --set-file images.imageCredentials.dockerConfigJson=pullsecret.json
+# helm install mce ./hack/mce-chart --set-file images.imageCredentials.dockerConfigJson=pullsecret.json
 
 # install upstream mce 
-$HELM install mce ./e2e/mce-chart -f ./e2e/configuration/mce-values.yaml
+$HELM install mce ./hack/mce-chart -f ./test/configuration/mce-values.yaml
 
 
 echo ""
@@ -68,7 +68,7 @@ waitForReady "kubectl get crds | grep -c \"klusterletconfigs\"" 1
 
 echo ""
 echo "###### Create global klusterletconfig ######"
-kubectl apply -f ./e2e/configuration/klusterletconfig.yaml
+kubectl apply -f ./test/configuration/klusterletconfig.yaml
 
 echo ""
 echo "###### Wait unitl local-cluster is created ######"
@@ -91,7 +91,7 @@ kubectl apply -f ./configuration/workmanagercma.yaml
 echo ""
 echo "#### Install Policy addons #####"
 make ensure-helm
-$HELM install policy ./policy -f ./e2e/configuration/policy-values.yaml
+$HELM install policy ./policy -f ./test/configuration/policy-values.yaml
 
 
 echo ""
