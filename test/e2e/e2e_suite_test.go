@@ -1,6 +1,7 @@
 package e2e
 
 import (
+	"fmt"
 	"os"
 	"testing"
 	"time"
@@ -51,9 +52,18 @@ var _ = ginkgo.BeforeSuite(func() {
 	gomega.Eventually(func() error {
 		return nil
 	}).Should(gomega.Succeed())
-
 })
 
 var _ = ginkgo.AfterSuite(func() {
 	ginkgo.By("clean created resources")
+})
+
+var _ = ginkgo.ReportAfterSuite("MCE on ARO E2E Test Report", func(report ginkgo.Report) {
+	junitReportFile := os.Getenv("JUNIT_REPORT_FILE")
+	if junitReportFile != "" {
+		err := GenerateJUnitReport(report, junitReportFile)
+		if err != nil {
+			fmt.Printf("Failed to generate the report due to: %v", err)
+		}
+	}
 })
