@@ -1,14 +1,14 @@
 global:
-  registryOverride: "quay.io"
+  registryOverride: "quay.io/stolostron"
   # registry for ACM 2.11.2
   # registryOverride: "registry.redhat.io"
   imageOverrides:
     # upstream images
-    governance_policy_propagator: "stolostron/governance-policy-propagator:2.12.0-SNAPSHOT-2024-09-30-01-46-06"
-    governance_policy_addon_controller: "stolostron/governance-policy-addon-controller:2.12.0-SNAPSHOT-2024-09-30-01-46-06" 
-    config_policy_controller: "stolostron/config-policy-controller:2.12.0-SNAPSHOT-2024-09-30-01-46-06"
-    governance_policy_framework_addon: "stolostron/governance-policy-framework-addon:2.12.0-SNAPSHOT-2024-09-30-01-46-06"
-    klusterlet_addon_controller: "stolostron/klusterlet-addon-controller:2.12.0-SNAPSHOT-2024-09-30-01-46-06"
+    governance_policy_propagator: "governance-policy-propagator:2.13.0-SNAPSHOT-2024-11-20-23-56-00"
+    governance_policy_addon_controller: "governance-policy-addon-controller:2.13.0-SNAPSHOT-2024-11-20-23-56-00"
+    config_policy_controller: "config-policy-controller:2.13.0-SNAPSHOT-2024-11-20-23-56-00"
+    governance_policy_framework_addon: "governance-policy-framework-addon:2.13.0-SNAPSHOT-2024-11-20-23-56-00"
+    klusterlet_addon_controller: "klusterlet-addon-controller:2.13.0-SNAPSHOT-2024-11-20-23-56-00"
 
     # images in ACM 2.11.2
     # governance_policy_propagator: "rhacm2/governance-policy-propagator-rhel9@sha256:af848e7e31d8ec9b5ad1896a5d5ccc67f320a7740245c190ba8a76757984e65b"

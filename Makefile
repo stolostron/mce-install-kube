@@ -43,6 +43,10 @@ e2e-install:
 e2e-import-cluster:
 	hack/e2e-import-cluster.sh
 
+test-e2e:
+	go test -c ./test/e2e
+	./e2e.test -test.v -ginkgo.v
+
 ensure-helm:
 ifeq "" "$(wildcard $(HELM))"
 	$(info Installing helm into '$(HELM)')

@@ -72,4 +72,10 @@ jobs:
           KUBECONFIG: /home/runner/.kube/hub-kubeconfig 
           MANAGED_CLUSTER_NAME: spoke
           MANAGED_KUBECONFIG: /home/runner/.kube/spoke-internal-kubeconfig 
-          EXTERNAL_MANAGED_KUBECONFIG: /home/runner/.kube/spoke-internal-kubeconfig 
+          EXTERNAL_MANAGED_KUBECONFIG: /home/runner/.kube/spoke-internal-kubeconfig
+      - name: Run e2e
+        run: |
+          make test-e2e
+        env:
+          KUBECONFIG: /home/runner/.kube/hub-kubeconfig
+          MANAGED_CLUSTER_NAME: spoke

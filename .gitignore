@@ -8,3 +8,4 @@ e2e.test
 
 .vscode
 *.tgz
+vendor
