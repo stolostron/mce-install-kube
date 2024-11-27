@@ -3,4 +3,4 @@ kind: KlusterletConfig
 metadata:
   name: global
 spec:
-  hubKubeAPIServerURL: "hub cluster api server url"
+  hubKubeAPIServerURL: "https://kubernetes.default.svc:443"

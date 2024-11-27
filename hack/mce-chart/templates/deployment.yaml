@@ -95,8 +95,6 @@ spec:
           value: quay.io/stolostron/cluster-proxy-addon@sha256
         - name: OPERAND_IMAGE_CLUSTERCLAIMS_CONTROLLER
           value: quay.io/stolostron/clusterclaims-controller@sha256
-        - name: OPERAND_IMAGE_CLUSTERLIFECYCLE_STATE_METRICS
-          value: quay.io/stolostron/clusterlifecycle-state-metrics@sha256
         - name: OPERAND_IMAGE_CONSOLE_MCE
           value: quay.io/stolostron/console-mce@sha256
         - name: OPERAND_IMAGE_DISCOVERY_OPERATOR
@@ -116,7 +114,7 @@ spec:
         - name: OPERAND_IMAGE_HYPERSHIFT_ADDON_OPERATOR_CANARY_TEST
           value: quay.io/stolostron/hypershift-addon-operator-canary-test@sha256
         - name: OPERAND_IMAGE_HYPERSHIFT_OPERATOR
-          value: quay.io/stolostron/hypershift-operator@sha256
+          value: {{ .Values.images.overrides.hypershift_operator }}
         - name: OPERAND_IMAGE_IMAGE_BASED_INSTALL_OPERATOR
           value: quay.io/stolostron/image-based-install-operator@sha256
         - name: OPERAND_IMAGE_MANAGED_SERVICEACCOUNT
@@ -147,6 +145,8 @@ spec:
           value: {{ .Values.images.overrides.work }}
         - name: OPERAND_IMAGE_KUBE_RBAC_PROXY_MCE
           value: {{ .Values.images.overrides.kube_rbac_proxy_mce }}
+        - name: OPERAND_IMAGE_CLUSTERLIFECYCLE_STATE_METRICS
+          value: {{ .Values.images.overrides.clusterlifecycle_state_metrics }}
         - name: OPERATOR_VERSION
           value: {{ .Chart.AppVersion }}
         - name: OPERATOR_PACKAGE

@@ -42,14 +42,7 @@ function waitForReady() {
 
 echo ""
 echo "#### Install MCE on Hub cluster ####"
-make ensure-helm
-
-# install released mce
-# helm install mce ./hack/mce-chart --set-file images.imageCredentials.dockerConfigJson=pullsecret.json
-
-# install upstream mce 
-$HELM install mce ./hack/mce-chart -f ./test/configuration/mce-values.yaml
-
+make install-e2e-mce
 
 echo ""
 echo "###### Wait until MCE pod is running ######"
@@ -62,13 +55,16 @@ waitForReady "kubectl get clustermanagers.operator.open-cluster-management.io  |
 echo ""
 echo "#### Configure MCE ####"
 
+# the crd should be installed by hypershift operator
+# install it manully because does not install hypershift operator in kind cluster
 echo ""
-echo "###### Wait until klusterletconfig CRD is installed ######"
-waitForReady "kubectl get crds | grep -c \"klusterletconfigs\"" 1
+echo "###### Apply hostedCluster CRD to make hypershift addon Available ######"
+kubectl create -f ./test/configuration/hostedclusters-crd.yaml
+
 
 echo ""
-echo "###### Create global klusterletconfig ######"
-kubectl apply -f ./test/configuration/klusterletconfig.yaml
+echo "###### klusterletconfig is for managed cluster ######"
+kubectl apply -f configuration/klusterletconfig.yaml
 
 echo ""
 echo "###### Wait unitl local-cluster is created ######"
@@ -90,9 +86,7 @@ kubectl apply -f ./configuration/workmanagercma.yaml
 
 echo ""
 echo "#### Install Policy addons #####"
-make ensure-helm
-$HELM install policy ./policy -f ./test/configuration/policy-values.yaml
-
+make install-e2e-policy
 
 echo ""
 echo "###### Enable policy addons for local-cluster ######"

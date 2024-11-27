@@ -6,6 +6,7 @@ images:
     backplane_operator: "registry.redhat.io/multicluster-engine/backplane-rhel9-operator@sha256:8c2f526398df56f92bfc62af8e42c3e373c236ab67e58e877cf9690fc480d46a"
     registration_operator: "registry.redhat.io/multicluster-engine/registration-operator-rhel9@sha256:8a37700e9848830dca9a3eebd4c8ca6abd7b04dc28ab5cefd743d00dd58be92a"
     hypershift_addon_operator: "registry.redhat.io/multicluster-engine/hypershift-addon-rhel9-operator@sha256:af40c47a901c3c1851104427d3fd9db1f0cb6205e37917dc87af57facc90d75d"
+    hypershift_operator: "registry.redhat.io/multicluster-engine/hypershift-rhel9-operator@sha256:161292cbf4b81c928e6dc9162dc63b02b21c93bfa92b3272f437dc4ff5a02c3a"
     managedcluster_import_controller: "registry.redhat.io/multicluster-engine/managedcluster-import-controller-rhel9@sha256:09a2f864c76373c9c6af4e8f7c2ffe4dffecc2637cf1647b7d2926419265e3f4"
     multicloud_manager: "registry.redhat.io/multicluster-engine/multicloud-manager-rhel9@sha256:a0873734a8e0d0b5092820d7ded0436c30fd572abdabb01159b53f0bb2e9d4a3"
     addon_manager: "registry.redhat.io/multicluster-engine/addon-manager-rhel9@sha256:25cdce9461a24748fc6631fa4394b813deabdb27d0c95956508d2a38c504a6a9"
@@ -13,6 +14,6 @@ images:
     registration: "registry.redhat.io/multicluster-engine/registration-rhel9@sha256:26ef4145f464f1c5cdb6ab42c119766669f7f08e46cbd4185bdbd3f4cd70bb54"
     placement: "registry.redhat.io/multicluster-engine/placement-rhel9@sha256:737cf1d7dcdf8c32d96894eebd686caf35959232f3fd774b307cf1df8068d26c"
     kube_rbac_proxy_mce: "registry.redhat.io/multicluster-engine/kube-rbac-proxy-mce-rhel9@sha256:b1ada80f881131283a94d84cb37edc4b9725ccea9b66ebf8ccd6956cb515531a"
-
+    clusterlifecycle_state_metrics: "registry.redhat.io/multicluster-engine/clusterlifecycle-state-metrics-rhel9@sha256:bf5bb514e4d8af5e38317c3727d4cd9f90c22b293fe3e2367f9f0e179e0ee0c7"
   imageCredentials:
     dockerConfigJson: ""
