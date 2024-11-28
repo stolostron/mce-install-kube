@@ -9,19 +9,13 @@ The MCE operator is required to be installed on the Hub cluster.
 
 # Configure the MCE 
 
-1. Set the hub api server to the `spec.hubKubeAPIServerURL` in the `global` `klusterletConfig`, and then apply it.
-
-```
-kubectl apply -f ./configuration/klusterletconfig.yaml
-```
-
-2. Apply a `AddOnDeploymentConfig` for add-ons working in hosted mode.
+1. Apply a `AddOnDeploymentConfig` for add-ons working in hosted mode.
 
 ```
 kubectl apply -f ./configuration/addonhostedconfig.yaml
 ```
 
-3. Patch work-manager add-on to support hosted mode.
+2. Patch work-manager add-on to support hosted mode.
    
 ```
 kubectl patch clustermanagementaddon work-manager --type merge -p '{"spec":{"supportedConfigs":[{"defaultConfig":{"name":"addon-hosted-config","namespace":"multicluster-engine"},"group":"addon.open-cluster-management.io","resource":"addondeploymentconfigs"}]}}'

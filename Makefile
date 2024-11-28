@@ -27,15 +27,22 @@ ifeq ($(GOHOSTOS),darwin)
 	endif
 endif
 
+ImageCredentials?=""
 
 update:
 	hack/update.sh
 
 install-mce: ensure-helm
-	$(HELM) upgrade --install mce ./e2e/mce-chart
+	$(HELM) upgrade --install mce ./hack/mce-chart --set-file images.imageCredentials.dockerConfigJson=$(ImageCredentials)
 
 install-policy: ensure-helm
 	$(HELM) upgrade --install policy ./policy
+
+install-e2e-mce: ensure-helm
+	$(HELM) upgrade --install mce ./hack/mce-chart -f ./test/configuration/mce-values.yaml
+
+install-e2e-policy: ensure-helm
+	$(HELM) upgrade --install policy ./policy -f ./test/configuration/policy-values.yaml
 
 e2e-install:
 	hack/e2e-install.sh
