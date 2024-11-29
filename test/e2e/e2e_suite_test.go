@@ -1,6 +1,7 @@
 package e2e
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"testing"
@@ -8,12 +9,16 @@ import (
 
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/client-go/tools/clientcmd"
 )
 
 var (
-	hubKubeConfig string
-	HubClients    *Clients
+	hubKubeConfig     string
+	HubClients        *Clients
+	HostedClusterName string
 )
 
 const (
@@ -22,8 +27,13 @@ const (
 	GovernancePolicyFrameworkAddonName = "governance-policy-framework"
 	HypershiftAddonName                = "hypershift-addon"
 	WorkManagerAddonName               = "work-manager"
+	mceName                            = "multiclusterengine"
 )
 
+var mceGVR = schema.GroupVersionResource{Group: "multicluster.openshift.io", Version: "v1", Resource: "multiclusterengines"}
+
+// - KUBECONFIG is the location of the kubeconfig file to use
+// - MANAGED_CLUSTER_NAME is the name of managed cluster
 func TestE2E(tt *testing.T) {
 	OutputFail := func(message string, callerSkip ...int) {
 		ginkgo.Fail(message, callerSkip...)
@@ -48,8 +58,22 @@ var _ = ginkgo.BeforeSuite(func() {
 	gomega.Default.SetDefaultEventuallyTimeout(90 * time.Second)
 	gomega.Default.SetDefaultEventuallyPollingInterval(5 * time.Second)
 
-	ginkgo.By("Check Hub Ready")
+	ginkgo.By("Check if MCE is Ready")
 	gomega.Eventually(func() error {
+		mce, err := HubClients.DynamicClient.Resource(mceGVR).Get(context.TODO(), mceName, metav1.GetOptions{})
+		if err != nil {
+			return fmt.Errorf("failed to get mce: %v", err)
+		}
+		mcePhase, found, err := unstructured.NestedString(mce.Object, "status", "phase")
+		if err != nil {
+			return fmt.Errorf("failed to get mce status: %v", err)
+		}
+		if !found {
+			return fmt.Errorf("failed found phase in the status of mce")
+		}
+		if mcePhase != "Available" {
+			return fmt.Errorf("the mce status is not Available")
+		}
 		return nil
 	}).Should(gomega.Succeed())
 })
