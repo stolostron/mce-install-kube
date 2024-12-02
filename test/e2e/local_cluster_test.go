@@ -8,7 +8,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-var _ = Describe("Check the status of local-cluster.\n", Label("local-cluster"), func() {
+var _ = Describe("Check the status of local-cluster.", Label("local-cluster"), func() {
 	BeforeEach(func() {
 		By("Check the status of local-cluster.")
 		Eventually(func() error {
@@ -19,13 +19,7 @@ var _ = Describe("Check the status of local-cluster.\n", Label("local-cluster"),
 			}
 			return CheckManagedClusterStatus(cluster)
 		}).Should(Succeed())
-	})
 
-	AfterEach(func() {
-
-	})
-
-	It("Check status of the addons in local-cluster.\n", func() {
 		By("Check status of the addons in local-cluster.")
 		Eventually(func() error {
 			addons, err := HubClients.AddonClient.AddonV1alpha1().ManagedClusterAddOns(LocalClusterName).
@@ -51,5 +45,17 @@ var _ = Describe("Check the status of local-cluster.\n", Label("local-cluster"),
 			}
 			return nil
 		}).Should(Succeed())
+	})
+
+	AfterEach(func() {
+
+	})
+
+	Context("Test cases for the work manager addon.", func() {
+		It("Check the manangedClusterInfo status.", func() {
+			Eventually(func() error {
+				return CheckManagedClusterInfo(LocalClusterName)
+			}).Should(Succeed())
+		})
 	})
 })

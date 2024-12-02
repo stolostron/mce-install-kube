@@ -29,7 +29,10 @@ endif
 
 ImageCredentials?=""
 
-update:
+fmt:
+	go fmt ./test/e2e
+
+update: fmt
 	hack/update.sh
 
 install-mce: ensure-helm

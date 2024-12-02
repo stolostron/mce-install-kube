@@ -3,7 +3,6 @@ package e2e
 import (
 	"context"
 	"fmt"
-	"os"
 
 	"k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/api/meta"
@@ -74,12 +73,21 @@ func DeleteResource(gvr schema.GroupVersionResource, namespace, name string) err
 }
 
 func GetResource(gvr schema.GroupVersionResource, namespace, name string) (*unstructured.Unstructured, error) {
-	obj, err := HubClients.DynamicClient.Resource(gvr).Namespace(namespace).Get(context.TODO(), name, metav1.GetOptions{})
+	if namespace != "" {
+		obj, err := HubClients.DynamicClient.Resource(gvr).Namespace(namespace).Get(context.TODO(), name, metav1.GetOptions{})
+		if err != nil {
+			return nil, err
+		}
+
+		return obj, nil
+	}
+	obj, err := HubClients.DynamicClient.Resource(gvr).Get(context.TODO(), name, metav1.GetOptions{})
 	if err != nil {
 		return nil, err
 	}
 
 	return obj, nil
+
 }
 
 func LoadResourceFromJSON(json string) (*unstructured.Unstructured, error) {
@@ -88,9 +96,35 @@ func LoadResourceFromJSON(json string) (*unstructured.Unstructured, error) {
 	return &obj, err
 }
 
-func GetManagedClusterName() string {
-	if HostedClusterName == "" {
-		return os.Getenv("MANAGED_CLUSTER_NAME")
+func CheckManagedClusterInfo(clusterName string) error {
+	clusterInfo, err := GetResource(clusterInfoGVR, clusterName, clusterName)
+	if err != nil {
+		return err
 	}
-	return HostedClusterName
+
+	kubeVersion, found, err := unstructured.NestedString(clusterInfo.Object, "status", "version")
+	if !found || err != nil || kubeVersion == "" {
+		return fmt.Errorf("failed get kubeVersion in clusterinfo %v, found:%v, err:%v, kubeVersion:%v",
+			clusterName, found, err, kubeVersion)
+	}
+
+	return nil
+}
+
+func CheckMCE() error {
+	mce, err := GetResource(mceGVR, "", mceName)
+	if err != nil {
+		return err
+	}
+	mcePhase, found, err := unstructured.NestedString(mce.Object, "status", "phase")
+	if err != nil {
+		return fmt.Errorf("failed to get mce status: %v", err)
+	}
+	if !found {
+		return fmt.Errorf("failed found phase in the status of mce")
+	}
+	if mcePhase != "Available" {
+		return fmt.Errorf("the mce status is not Available")
+	}
+	return nil
 }
