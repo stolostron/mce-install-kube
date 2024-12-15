@@ -8,28 +8,7 @@ import (
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/client-go/tools/clientcmd"
-)
-
-var (
-	hubKubeConfig     string
-	HubClients        *Clients
-	HostedClusterName string
-)
-
-const (
-	LocalClusterName                   = "local-cluster"
-	ConfigPolicyAddonName              = "config-policy-controller"
-	GovernancePolicyFrameworkAddonName = "governance-policy-framework"
-	HypershiftAddonName                = "hypershift-addon"
-	WorkManagerAddonName               = "work-manager"
-	mceName                            = "multiclusterengine"
-)
-
-var (
-	mceGVR         = schema.GroupVersionResource{Group: "multicluster.openshift.io", Version: "v1", Resource: "multiclusterengines"}
-	clusterInfoGVR = schema.GroupVersionResource{Group: "internal.open-cluster-management.io", Version: "v1beta1", Resource: "managedclusterinfos"}
 )
 
 // - KUBECONFIG is the location of the kubeconfig file to use
