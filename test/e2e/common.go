@@ -2,6 +2,7 @@ package e2e
 
 import (
 	"fmt"
+	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	apiextensionsclient "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset"
 	"k8s.io/apimachinery/pkg/api/meta"
@@ -14,6 +15,31 @@ import (
 	clusterclient "open-cluster-management.io/api/client/cluster/clientset/versioned"
 	operatorclient "open-cluster-management.io/api/client/operator/clientset/versioned"
 	workv1client "open-cluster-management.io/api/client/work/clientset/versioned"
+)
+
+var (
+	hubKubeConfig string
+)
+
+var (
+	HubClients        *Clients
+	HostedClusterName string
+)
+
+const (
+	LocalClusterName                   = "local-cluster"
+	ConfigPolicyAddonName              = "config-policy-controller"
+	GovernancePolicyFrameworkAddonName = "governance-policy-framework"
+	HypershiftAddonName                = "hypershift-addon"
+	WorkManagerAddonName               = "work-manager"
+	MCEName                            = "multiclusterengine"
+)
+
+var (
+	MCEGVR                   = schema.GroupVersionResource{Group: "multicluster.openshift.io", Version: "v1", Resource: "multiclusterengines"}
+	ClusterInfoGVR           = schema.GroupVersionResource{Group: "internal.open-cluster-management.io", Version: "v1beta1", Resource: "managedclusterinfos"}
+	HostedClusterGVR         = schema.GroupVersionResource{Group: "hypershift.openshift.io", Version: "v1beta1", Resource: "hostedclusters"}
+	KlusterletAddonConfigGVR = schema.GroupVersionResource{Group: "agent.open-cluster-management.io", Version: "v1", Resource: "klusterletaddonconfigs"}
 )
 
 type Clients struct {
