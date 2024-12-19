@@ -1,7 +1,9 @@
-
-replicaCount: 2
-availabilityConfig: High
+mceVersion: 2.8
+replicaCount: 1
+availabilityConfig: Basic
 images:
+  registry: ""
+  tag: ""
   overrides:
     backplane_operator: "registry.redhat.io/multicluster-engine/backplane-rhel9-operator@sha256:8c2f526398df56f92bfc62af8e42c3e373c236ab67e58e877cf9690fc480d46a"
     registration_operator: "registry.redhat.io/multicluster-engine/registration-operator-rhel9@sha256:8a37700e9848830dca9a3eebd4c8ca6abd7b04dc28ab5cefd743d00dd58be92a"
@@ -17,3 +19,6 @@ images:
     clusterlifecycle_state_metrics: "registry.redhat.io/multicluster-engine/clusterlifecycle-state-metrics-rhel9@sha256:bf5bb514e4d8af5e38317c3727d4cd9f90c22b293fe3e2367f9f0e179e0ee0c7"
   imageCredentials:
     dockerConfigJson: ""
+    registry: "quay.io"
+    userName: ""
+    password: ""

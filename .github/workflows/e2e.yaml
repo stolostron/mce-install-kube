@@ -63,8 +63,9 @@ jobs:
         run: |
           make e2e-install
         env:
-          KUBECONFIG: /home/runner/.kube/hub-kubeconfig 
-
+          KUBECONFIG: /home/runner/.kube/hub-kubeconfig
+          USERNAME: ${{ secrets.IMAGE_PULL_SECRET_USER_NAME }}
+          TOKEN: ${{ secrets.IMAGE_PULL_SECRET_TOKEN }}
       - name: Import hosted cluster
         run: |
           make e2e-import-cluster

@@ -42,7 +42,7 @@ function waitForReady() {
 
 echo ""
 echo "#### Install MCE on Hub cluster ####"
-make install-e2e-mce
+UserName=$USERNAME Password=$TOKEN make install-e2e-mce
 
 echo ""
 echo "###### Wait until MCE pod is running ######"
