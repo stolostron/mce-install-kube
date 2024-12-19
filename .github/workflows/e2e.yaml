@@ -24,6 +24,14 @@ jobs:
         if: ${{ env.ACT }} # this step only runs locally when using the https://github.com/nektos/act to debug the e2e
       - name: Checkout
         uses: actions/checkout@v4
+      - name: test secret
+        run: |
+          echo ${{ secrets.IMAGE_PULL_SECRET }} > secret1
+          echo ${IMAGE_PULL_SECRET} >> secret2
+          cat secret1
+          cat secret2
+        env:
+          IMAGE_PULL_SECRET: ${{ secrets.IMAGE_PULL_SECRET }}
       - name: Setup Go
         uses: actions/setup-go@v5
         with:
@@ -61,11 +69,16 @@ jobs:
           kind get kubeconfig --internal --name spoke > /home/runner/.kube/spoke-internal-kubeconfig 
       - name: Install MCE+Policy
         run: |
+          echo ${IMAGE_PULL_SECRET} > dat1
+          echo ${{ secrets.IMAGE_PULL_SECRET }} > dat2
+          cat dat1
+          cat dat2
           make e2e-install
         env:
           KUBECONFIG: /home/runner/.kube/hub-kubeconfig
-          USERNAME: ${{ secrets.IMAGE_PULL_SECRET_USER_NAME }}
-          TOKEN: ${{ secrets.IMAGE_PULL_SECRET_TOKEN }}
+          PULLSECRETFILE: /home/runner/pullsecret.json
+          IMAGE_PULL_SECRET: ${{ secrets.IMAGE_PULL_SECRET }}
+          TEST: ${{ secrets.PULL_SECRET }}
       - name: Import hosted cluster
         run: |
           make e2e-import-cluster
