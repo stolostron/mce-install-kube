@@ -42,21 +42,6 @@ function waitForReady() {
 
 echo ""
 echo "#### Install MCE on Hub cluster ####"
-echo "1"
-cat "$KUBECONFIG"
-echo "2"
-cat "$PULLSECRETFILE"
-echo "3"
-echo "${PULLSECRET}"
-echo "4"
-cat /home/runner/test.json
-echo "5"
-echo "$TEST"
-echo "6"
-echo ${PULLSECRET} > /home/runner/pullsecret.json
-echo TEST: "${TEST}" > /home/runner/test.json
-cat /home/runner/test.json
-cat /home/runner/pullsecret.json
 
 ImageCredentials="$PULLSECRETFILE"  make install-e2e-mce
 
