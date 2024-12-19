@@ -27,7 +27,12 @@ ifeq ($(GOHOSTOS),darwin)
 	endif
 endif
 
+MCEVersion?="2.8"
+Tag?=""
+
 ImageCredentials?=""
+UserName?=""
+Password?=""
 
 fmt:
 	go fmt ./test/e2e
@@ -36,13 +41,13 @@ update: fmt
 	hack/update.sh
 
 install-mce: ensure-helm
-	$(HELM) upgrade --install mce ./hack/mce-chart --set-file images.imageCredentials.dockerConfigJson=$(ImageCredentials)
+	$(HELM) upgrade --install mce ./hack/mce-chart --set mceVersion=$(MCEVersion),images.tag=$(Tag) --set-file images.imageCredentials.dockerConfigJson=$(ImageCredentials)
 
 install-policy: ensure-helm
 	$(HELM) upgrade --install policy ./policy
 
 install-e2e-mce: ensure-helm
-	$(HELM) upgrade --install mce ./hack/mce-chart -f ./test/configuration/mce-values.yaml
+	$(HELM) upgrade --install mce ./hack/mce-chart -f ./test/configuration/mce-values.yaml --set mceVersion=$(MCEVersion),images.tag=$(Tag),images.imageCredentials.userName=$(UserName),images.imageCredentials.password=$(Password) --set-file images.imageCredentials.dockerConfigJson=$(ImageCredentials)
 
 install-e2e-policy: ensure-helm
 	$(HELM) upgrade --install policy ./policy -f ./test/configuration/policy-values.yaml

@@ -114,46 +114,36 @@ spec:
         - name: OPERAND_IMAGE_HYPERSHIFT_ADDON_OPERATOR_CANARY_TEST
           value: quay.io/stolostron/hypershift-addon-operator-canary-test@sha256
         - name: OPERAND_IMAGE_HYPERSHIFT_OPERATOR
-          value: {{ .Values.images.overrides.hypershift_operator }}
-        - name: OPERAND_IMAGE_IMAGE_BASED_INSTALL_OPERATOR
-          value: quay.io/stolostron/image-based-install-operator@sha256
-        - name: OPERAND_IMAGE_MANAGED_SERVICEACCOUNT
-          value: quay.io/stolostron/managed-serviceaccount@sha256
-        - name: OPERAND_IMAGE_MANAGED_SERVICEACCOUNT_E2E
-          value: quay.io/stolostron/managed-serviceaccount-e2e@sha256
-        - name: OPERAND_IMAGE_POSTGRESQL_12
-          value: quay.io/stolostron/postgresql-12-centos7@sha256
-        - name: OPERAND_IMAGE_PROVIDER_CREDENTIAL_CONTROLLER
-          value: quay.io/stolostron/provider-credential-controller@sha256
+          value: {{ template "hypershiftOperatorImage" . }}
         - name: OPERAND_IMAGE_ADDON_MANAGER
-          value: {{ .Values.images.overrides.addon_manager }}
+          value: {{ template "addonManagerImage" . }}
         - name: OPERAND_IMAGE_BACKPLANE_OPERATOR
-          value: {{ .Values.images.overrides.backplane_operator }}
+          value: {{ template "backplaneOperatorImage" . }}
         - name: OPERAND_IMAGE_HYPERSHIFT_ADDON_OPERATOR
-          value: {{ .Values.images.overrides.hypershift_addon_operator }}
+          value: {{ template "hypershiftAddonOperatorImage" . }}
         - name: OPERAND_IMAGE_MANAGEDCLUSTER_IMPORT_CONTROLLER
-          value: {{ .Values.images.overrides.managedcluster_import_controller }}
+          value: {{ template "managedclusterImportControllerImage" . }}
         - name: OPERAND_IMAGE_MULTICLOUD_MANAGER
-          value: {{ .Values.images.overrides.multicloud_manager }}
+          value: {{ template "multicloudManagerImage" . }}
         - name: OPERAND_IMAGE_PLACEMENT
-          value: {{ .Values.images.overrides.placement }}
+          value: {{ template "placementImage" . }}
         - name: OPERAND_IMAGE_REGISTRATION
-          value: {{ .Values.images.overrides.registration }}
+          value: {{ template "registrationImage" . }}
         - name: OPERAND_IMAGE_REGISTRATION_OPERATOR
-          value: {{ .Values.images.overrides.registration_operator }}
+          value: {{ template "registrationOperatorImage" . }}
         - name: OPERAND_IMAGE_WORK
-          value: {{ .Values.images.overrides.work }}
+          value: {{ template "workImage" . }}
         - name: OPERAND_IMAGE_KUBE_RBAC_PROXY_MCE
-          value: {{ .Values.images.overrides.kube_rbac_proxy_mce }}
+          value: {{ template "kubeRbacProxyMceImage" . }}
         - name: OPERAND_IMAGE_CLUSTERLIFECYCLE_STATE_METRICS
-          value: {{ .Values.images.overrides.clusterlifecycle_state_metrics }}
+          value: {{ template "clusterlifecycleStateMetricsImage" . }}
         - name: OPERATOR_VERSION
-          value: {{ .Chart.AppVersion }}
+          value: "{{ .Values.mceVersion  }}"
         - name: OPERATOR_PACKAGE
           value: multicluster-engine
         - name: OPERATOR_CONDITION_NAME
-          value: multicluster-engine.v{{ .Chart.AppVersion }}
-        image: {{ .Values.images.overrides.backplane_operator }}
+          value: multicluster-engine.v{{ .Values.mceVersion }}
+        image: "{{ template "backplaneOperatorImage" . }}"
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3

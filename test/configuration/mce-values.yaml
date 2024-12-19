@@ -1,21 +1,26 @@
-
+mceVersion: 2.8
 replicaCount: 1
 availabilityConfig: Basic
 
 images:
+  registry: ""
+  tag: ""
   overrides:
-    backplane_operator: "quay.io/stolostron/backplane-operator:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    registration_operator: "quay.io/stolostron/registration-operator:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    hypershift_addon_operator: "quay.io/stolostron/hypershift-addon-operator:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    hypershift_operator: "quay.io/acm-d/hypershift-rhel9-operator:v2.8.0-4"
-    managedcluster_import_controller: "quay.io/stolostron/managedcluster-import-controller:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    multicloud_manager: "quay.io/stolostron/multicloud-manager:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    addon_manager: "quay.io/stolostron/addon-manager:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    work: "quay.io/stolostron/work:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    registration: "quay.io/stolostron/registration:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    placement: "quay.io/stolostron/placement:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    kube_rbac_proxy_mce: "quay.io/stolostron/kube-rbac-proxy-mce:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    clusterlifecycle_state_metrics: "quay.io/stolostron/clusterlifecycle-state-metrics:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-
+    backplane_operator: "quay.io/acm-d/backplane-rhel9-operator:v2.8.0-13"
+    registration_operator: "quay.io/acm-d/registration-operator-rhel9:v2.8.0-13"
+    hypershift_addon_operator: "quay.io/acm-d/hypershift-addon-rhel9-operator:v2.8.0-5"
+    hypershift_operator: "quay.io/acm-d/hypershift-rhel9-operator:v2.8.0-14"
+    managedcluster_import_controller: "quay.io/acm-d/managedcluster-import-controller-rhel9:v2.8.0-13"
+    multicloud_manager: "quay.io/acm-d/multicloud-manager-rhel9:v2.8.0-9"
+    addon_manager: "quay.io/acm-d/addon-manager-rhel9:v2.8.0-13"
+    work: "quay.io/acm-d/work-rhel9:v2.8.0-13"
+    registration: "quay.io/acm-d/registration-rhel9:v2.8.0-13"
+    placement: "quay.io/acm-d/placement-rhel9:v2.8.0-13"
+    kube_rbac_proxy_mce: "quay.io/acm-d/kube-rbac-proxy-mce-rhel9:v2.8.0-13"
+    clusterlifecycle_state_metrics: "quay.io/acm-d/clusterlifecycle-state-metrics-rhel9:v2.8.0-10"
+    
   imageCredentials:
     dockerConfigJson: ""
+    registry: "quay.io"
+    userName: ""
+    password: ""
