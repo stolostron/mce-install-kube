@@ -114,7 +114,7 @@ spec:
         - name: OPERAND_IMAGE_HYPERSHIFT_ADDON_OPERATOR_CANARY_TEST
           value: quay.io/stolostron/hypershift-addon-operator-canary-test@sha256
         - name: OPERAND_IMAGE_HYPERSHIFT_OPERATOR
-          value: {{ .Values.images.overrides.hypershift_operator }}
+          value: quay.io/acm-d/hypershift-rhel9-operator:v2.8.0-4
         - name: OPERAND_IMAGE_IMAGE_BASED_INSTALL_OPERATOR
           value: quay.io/stolostron/image-based-install-operator@sha256
         - name: OPERAND_IMAGE_MANAGED_SERVICEACCOUNT
@@ -126,34 +126,34 @@ spec:
         - name: OPERAND_IMAGE_PROVIDER_CREDENTIAL_CONTROLLER
           value: quay.io/stolostron/provider-credential-controller@sha256
         - name: OPERAND_IMAGE_ADDON_MANAGER
-          value: {{ .Values.images.overrides.addon_manager }}
+          value: {{ .Values.images.registry }}/{{ .Values.images.overrides.addon_manager }}
         - name: OPERAND_IMAGE_BACKPLANE_OPERATOR
-          value: {{ .Values.images.overrides.backplane_operator }}
+          value: {{ .Values.images.registry }}/{{ .Values.images.overrides.backplane_operator }}
         - name: OPERAND_IMAGE_HYPERSHIFT_ADDON_OPERATOR
-          value: {{ .Values.images.overrides.hypershift_addon_operator }}
+          value: {{ .Values.images.registry }}/{{ .Values.images.overrides.hypershift_addon_operator }}
         - name: OPERAND_IMAGE_MANAGEDCLUSTER_IMPORT_CONTROLLER
-          value: {{ .Values.images.overrides.managedcluster_import_controller }}
+          value: {{ .Values.images.registry }}/{{ .Values.images.overrides.managedcluster_import_controller }}
         - name: OPERAND_IMAGE_MULTICLOUD_MANAGER
-          value: {{ .Values.images.overrides.multicloud_manager }}
+          value: {{ .Values.images.registry }}/{{ .Values.images.overrides.multicloud_manager }}
         - name: OPERAND_IMAGE_PLACEMENT
-          value: {{ .Values.images.overrides.placement }}
+          value: {{ .Values.images.registry }}/{{ .Values.images.overrides.placement }}
         - name: OPERAND_IMAGE_REGISTRATION
-          value: {{ .Values.images.overrides.registration }}
+          value: {{ .Values.images.registry }}/{{ .Values.images.overrides.registration }}
         - name: OPERAND_IMAGE_REGISTRATION_OPERATOR
-          value: {{ .Values.images.overrides.registration_operator }}
+          value: {{ .Values.images.registry }}/{{ .Values.images.overrides.registration_operator }}
         - name: OPERAND_IMAGE_WORK
-          value: {{ .Values.images.overrides.work }}
+          value: {{ .Values.images.registry }}/{{ .Values.images.overrides.work }}
         - name: OPERAND_IMAGE_KUBE_RBAC_PROXY_MCE
-          value: {{ .Values.images.overrides.kube_rbac_proxy_mce }}
+          value: {{ .Values.images.registry }}/{{ .Values.images.overrides.kube_rbac_proxy_mce }}
         - name: OPERAND_IMAGE_CLUSTERLIFECYCLE_STATE_METRICS
-          value: {{ .Values.images.overrides.clusterlifecycle_state_metrics }}
+          value: {{ .Values.images.registry }}/{{ .Values.images.overrides.clusterlifecycle_state_metrics }}
         - name: OPERATOR_VERSION
           value: {{ .Chart.AppVersion }}
         - name: OPERATOR_PACKAGE
           value: multicluster-engine
         - name: OPERATOR_CONDITION_NAME
-          value: multicluster-engine.v{{ .Chart.AppVersion }}
-        image: {{ .Values.images.overrides.backplane_operator }}
+          value: multicluster-engine.v{{ .Values.mceVersion }}
+        image: "{{ .Values.images.registry }}/{{ .Values.images.overrides.backplane_operator }}"
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
