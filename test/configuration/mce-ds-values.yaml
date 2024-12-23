@@ -1,0 +1,26 @@
+mceVersion: 2.8
+replicaCount: 1
+availabilityConfig: Basic
+
+images:
+  registry: "quay.io/acm-d"
+
+  overrides:
+    backplane_operator: "backplane-rhel9-operator:v2.8.0-13"
+    registration_operator: "registration-operator-rhel9:v2.8.0-13"
+    hypershift_addon_operator: "hypershift-addon-rhel9-operator:v2.8.0-5"
+    hypershift_operator: "hypershift-rhel9-operator:v2.8.0-14"
+    managedcluster_import_controller: "managedcluster-import-controller-rhel9:v2.8.0-13"
+    multicloud_manager: "multicloud-manager-rhel9:v2.8.0-9"
+    addon_manager: "addon-manager-rhel9:v2.8.0-13"
+    work: "work-rhel9:v2.8.0-13"
+    registration: "registration-rhel9:v2.8.0-13"
+    placement: "placement-rhel9:v2.8.0-13"
+    kube_rbac_proxy_mce: "kube-rbac-proxy-mce-rhel9:v2.8.0-13"
+    clusterlifecycle_state_metrics: "clusterlifecycle-state-metrics-rhel9:v2.8.0-10"
+    
+  imageCredentials:
+    dockerConfigJson: ""
+    registry: "quay.io"
+    userName: ""
+    password: ""

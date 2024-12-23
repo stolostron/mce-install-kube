@@ -1,5 +1,5 @@
-export ACM_VERSION?=2.12
-export MCE_VERSION?=2.7
+export ACM_VERSION?=2.13
+export MCE_VERSION?=2.8
 
 GOHOSTOS:=$(shell uname -s | tr '[:upper:]' '[:lower:]')
 
@@ -27,7 +27,15 @@ ifeq ($(GOHOSTOS),darwin)
 	endif
 endif
 
+
 ImageCredentials?=""
+UserName?=""
+Password?=""
+
+# upstream is ./test/configuration/mce-values.yaml
+# downstream is ./test/configuration/mce-ds-values.yaml
+MCEValues?="./test/configuration/mce-values.yaml"
+PolicyValues?="./test/configuration/policy-values.yaml"
 
 fmt:
 	go fmt ./test/e2e
@@ -42,10 +50,10 @@ install-policy: ensure-helm
 	$(HELM) upgrade --install policy ./policy
 
 install-e2e-mce: ensure-helm
-	$(HELM) upgrade --install mce ./hack/mce-chart -f ./test/configuration/mce-values.yaml
+	$(HELM) upgrade --install mce ./hack/mce-chart -f $(MCEValues) --set images.imageCredentials.userName=$(UserName),images.imageCredentials.password=$(Password)
 
 install-e2e-policy: ensure-helm
-	$(HELM) upgrade --install policy ./policy -f ./test/configuration/policy-values.yaml
+	$(HELM) upgrade --install policy ./policy -f $(PolicyValues)
 
 e2e-install:
 	hack/e2e-install.sh

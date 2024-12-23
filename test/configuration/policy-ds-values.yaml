@@ -1,0 +1,25 @@
+global:
+  registryOverride: "quay.io/acm-d"
+  # registry for ACM 2.11.2
+  # registryOverride: "registry.redhat.io"
+  imageOverrides:
+    # upstream images
+    governance_policy_propagator: "governance-policy-propagator-rhel9:v2.13.0-11"
+    governance_policy_addon_controller: "acm-governance-policy-addon-controller-rhel9:v2.13.0-12"
+    config_policy_controller: "config-policy-controller-rhel9:v2.13.0-14"
+    governance_policy_framework_addon: "acm-governance-policy-framework-addon-rhel9:v2.13.0-11"
+    klusterlet_addon_controller: "klusterlet-addon-controller-rhel9:v2.13.0-8"
+
+  namespace: multicluster-engine
+  pullSecret: open-cluster-management-image-pull-credentials
+
+  cma:
+    defaultConfig:
+      name: addon-hosted-config
+      namespace: multicluster-engine
+grc:
+  hubconfig:
+    replicaCount: 1
+cluster-lifecycle:
+  hubconfig:
+    replicaCount: 1

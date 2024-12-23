@@ -1,21 +1,25 @@
-
+mceVersion: 2.8
 replicaCount: 1
 availabilityConfig: Basic
 
 images:
+  registry: "quay.io/stolostron"
+
   overrides:
-    backplane_operator: "quay.io/stolostron/backplane-operator:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    registration_operator: "quay.io/stolostron/registration-operator:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    hypershift_addon_operator: "quay.io/stolostron/hypershift-addon-operator:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    hypershift_operator: "quay.io/acm-d/hypershift-rhel9-operator:v2.8.0-4"
-    managedcluster_import_controller: "quay.io/stolostron/managedcluster-import-controller:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    multicloud_manager: "quay.io/stolostron/multicloud-manager:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    addon_manager: "quay.io/stolostron/addon-manager:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    work: "quay.io/stolostron/work:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    registration: "quay.io/stolostron/registration:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    placement: "quay.io/stolostron/placement:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    kube_rbac_proxy_mce: "quay.io/stolostron/kube-rbac-proxy-mce:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    clusterlifecycle_state_metrics: "quay.io/stolostron/clusterlifecycle-state-metrics:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
+    backplane_operator: "backplane-operator:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
+    registration_operator: "registration-operator:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
+    hypershift_addon_operator: "hypershift-addon-operator:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
+    managedcluster_import_controller: "managedcluster-import-controller:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
+    multicloud_manager: "multicloud-manager:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
+    addon_manager: "addon-manager:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
+    work: "work:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
+    registration: "registration:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
+    placement: "placement:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
+    kube_rbac_proxy_mce: "kube-rbac-proxy-mce:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
+    clusterlifecycle_state_metrics: "clusterlifecycle-state-metrics:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
 
   imageCredentials:
     dockerConfigJson: ""
+    registry: "quay.io"
+    userName: ""
+    password: ""

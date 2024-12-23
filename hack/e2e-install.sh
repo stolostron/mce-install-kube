@@ -42,6 +42,7 @@ function waitForReady() {
 
 echo ""
 echo "#### Install MCE on Hub cluster ####"
+
 make install-e2e-mce
 
 echo ""

@@ -4,11 +4,11 @@ global:
   # registryOverride: "registry.redhat.io"
   imageOverrides:
     # upstream images
-    governance_policy_propagator: "governance-policy-propagator:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    governance_policy_addon_controller: "governance-policy-addon-controller:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    config_policy_controller: "config-policy-controller:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    governance_policy_framework_addon: "governance-policy-framework-addon:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
-    klusterlet_addon_controller: "klusterlet-addon-controller:2.13.0-SNAPSHOT-2024-11-26-00-59-13"
+    governance_policy_propagator: "governance-policy-propagator:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
+    governance_policy_addon_controller: "governance-policy-addon-controller:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
+    config_policy_controller: "config-policy-controller:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
+    governance_policy_framework_addon: "governance-policy-framework-addon:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
+    klusterlet_addon_controller: "klusterlet-addon-controller:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
 
   namespace: multicluster-engine
   pullSecret: open-cluster-management-image-pull-credentials
