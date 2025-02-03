@@ -128,6 +128,18 @@ func CheckMCE() error {
 	return nil
 }
 
+func CheckMCERemoval() error {
+	mce, err := GetResource(MCEGVR, "", MCEName)
+	if err != nil {
+		if errors.IsNotFound(err) {
+			return nil
+		}
+		return err
+	}
+
+	return fmt.Errorf("The MCE has not been successfully removed")
+}
+
 func ApplyHostedManagedCluster(name string) (*clusterv1.ManagedCluster, error) {
 	cluster, err := HubClients.ClusterClient.ClusterV1().ManagedClusters().Get(context.TODO(), name, metav1.GetOptions{})
 	if errors.IsNotFound(err) {
