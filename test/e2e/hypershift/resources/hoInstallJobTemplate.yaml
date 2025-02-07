@@ -1,0 +1,55 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hypershift-install-job
+  namespace: multicluster-engine
+spec:
+  activeDeadlineSeconds: 600
+  backoffLimit: 0
+  completionMode: NonIndexed
+  completions: 1
+  manualSelector: false
+  parallelism: 1
+  podReplacementPolicy: TerminatingOrFailed
+  suspend: false
+  template:
+    spec:
+      containers:
+      - args:
+        - --namespace
+        - hypershift
+        - --enable-conversion-webhook=false
+        - --external-dns-provider=azure
+        - --external-dns-secret
+        - external-dns-credentials
+        - --external-dns-domain-filter
+        - __EXT_DNS_ZONE_NAME__
+        - --managed-service
+        - ARO-HCP
+        - --aro-hcp-key-vault-users-client-id
+        - __AZURE_KEY_VAULT_AUTHORIZED_USER_ID__
+        - --hypershift-image
+        - __HYPERSHIFT_OPERATOR_IMAGE__  
+        - --tech-preview-no-upgrade
+        command:
+        - hypershift
+        - install
+        image: __HYPERSHIFT_OPERATOR_IMAGE__ 
+        imagePullPolicy: IfNotPresent
+        name: hypershift-operator
+        resources: {}
+        securityContext:
+          privileged: false
+          readOnlyRootFilesystem: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: open-cluster-management-image-pull-credentials
+      restartPolicy: Never
+      schedulerName: default-scheduler
+      serviceAccount: hypershift-install-sa
+      serviceAccountName: hypershift-install-sa
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  ttlSecondsAfterFinished: 172800
