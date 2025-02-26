@@ -193,6 +193,12 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+sed -i -e "s|__AZURE_SUBSCRIPTION_ID__|${AZURE_SUBSCRIPTION_ID}|" hosted_cluster_manifestwork.yaml
+if [ $? -ne 0 ]; then
+    echo "$(date) failed to substitue __AZURE_SUBSCRIPTION_ID__ in hosted_cluster_manifestwork.yaml"
+    exit 1
+fi
+
 sed -i -e "s|__AZURE_TENANT_ID__|${BASE64_AZURE_TENANT_ID}|" hosted_cluster_manifestwork.yaml
 if [ $? -ne 0 ]; then
     echo "$(date) failed to substitue __AZURE_TENANT_ID__ in hosted_cluster_manifestwork.yaml"
