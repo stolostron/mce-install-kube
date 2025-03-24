@@ -6,17 +6,17 @@ images:
   registry: "quay.io/stolostron"
 
   overrides:
-    backplane_operator: "backplane-operator:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
-    registration_operator: "registration-operator:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
-    hypershift_addon_operator: "hypershift-addon-operator:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
-    managedcluster_import_controller: "managedcluster-import-controller:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
-    multicloud_manager: "multicloud-manager:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
-    addon_manager: "addon-manager:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
-    work: "work:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
-    registration: "registration:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
-    placement: "placement:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
-    kube_rbac_proxy_mce: "kube-rbac-proxy-mce:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
-    clusterlifecycle_state_metrics: "clusterlifecycle-state-metrics:2.13.0-SNAPSHOT-2024-12-22-19-33-27"
+    backplane_operator: "backplane-operator:2.13.0-SNAPSHOT-2025-03-20-18-18-29"
+    registration_operator: "registration-operator:2.13.0-SNAPSHOT-2025-03-20-18-18-29"
+    hypershift_addon_operator: "hypershift-addon-operator:2.13.0-SNAPSHOT-2025-03-20-18-18-29"
+    managedcluster_import_controller: "managedcluster-import-controller:2.13.0-SNAPSHOT-2025-03-20-18-18-29"
+    multicloud_manager: "multicloud-manager:2.13.0-SNAPSHOT-2025-03-20-18-18-29"
+    addon_manager: "addon-manager:2.13.0-SNAPSHOT-2025-03-20-18-18-29"
+    work: "work:2.13.0-SNAPSHOT-2025-03-20-18-18-29"
+    registration: "registration:2.13.0-SNAPSHOT-2025-03-20-18-18-29"
+    placement: "placement:2.13.0-SNAPSHOT-2025-03-20-18-18-29"
+    kube_rbac_proxy_mce: "kube-rbac-proxy-mce:2.13.0-SNAPSHOT-2025-03-20-18-18-29"
+    clusterlifecycle_state_metrics: "clusterlifecycle-state-metrics:2.13.0-SNAPSHOT-2025-03-20-18-18-29"
 
   imageCredentials:
     dockerConfigJson: ""
