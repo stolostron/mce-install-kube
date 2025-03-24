@@ -54,8 +54,8 @@ done
 #cp ./multiclusterhub-operator/pkg/templates/charts/toggle/cluster-lifecycle/values.yaml ./policy/charts/cluster-lifecycle/
 
 CLUSTER_LIFECYCLE_FILES="./multiclusterhub-operator/pkg/templates/charts/toggle/cluster-lifecycle/templates/klusterlet-addon-role.yaml
-./multiclusterhub-operator/pkg/templates/charts/toggle/cluster-lifecycle/templates/klusterlet-addon-role_binding.yaml
-./multiclusterhub-operator/pkg/templates/charts/toggle/cluster-lifecycle/templates/klusterlet-addon-deployment.yaml"
+./multiclusterhub-operator/pkg/templates/charts/toggle/cluster-lifecycle/templates/klusterlet-addon-role_binding.yaml"
+#./multiclusterhub-operator/pkg/templates/charts/toggle/cluster-lifecycle/templates/klusterlet-addon-deployment.yaml"
 
 for f in $CLUSTER_LIFECYCLE_FILES
 do 
@@ -71,9 +71,9 @@ rm -rf backplane-operator
 
 git clone --depth 1 --branch "backplane-$MCE_VERSION" https://github.com/stolostron/backplane-operator.git
 
-cp ./backplane-operator/config/crd/bases/multicluster.openshift.io_multiclusterengines.yaml ./e2e/mce-chart/crds/
-cp ./backplane-operator/config/rbac/role.yaml ./e2e/mce-chart/templates/clusterrole.yaml
+cp ./backplane-operator/config/crd/bases/multicluster.openshift.io_multiclusterengines.yaml ./hack/mce-chart/crds/
+cp ./backplane-operator/config/rbac/role.yaml ./hack/mce-chart/templates/clusterrole.yaml
 
-$SED -i 's/multicluster-engine-operator-role/multicluster-engine-operator/' ./e2e/mce-chart/templates/clusterrole.yaml
+$SED -i 's/multicluster-engine-operator-role/multicluster-engine-operator/' ./hack/mce-chart/templates/clusterrole.yaml
 
 rm -rf backplane-operator
