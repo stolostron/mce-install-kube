@@ -25,48 +25,55 @@ done
 
 
 # update grc sub-chart
-#cp ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/Chart.yaml ./policy/charts/grc/
-#cp ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/values.yaml ./policy/charts/grc/
 
-# GRC_FILES="./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/config-policy-clustermanagementaddon.yaml
-# ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/governance-policy-framework-clustermanagementaddon.yaml
-# "
-# ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/grc-clusterrole.yaml
-# ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/grc-clusterrolebinding.yaml
-# ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/grc-policy-addon-role.yaml
-# ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/grc-policy-addon-rolebinding.yaml
-# ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/grc-policy-addon-clusterrole.yaml
-# ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/grc-policy-addon-clusterrolebinding.yaml
-# ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/grc-policy-addon-sa.yaml
-# ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/grc-role.yaml
-# ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/grc-rolebinding.yaml
-# ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/grc-sa.yaml
-# "
+GRC_FILES="grc-clusterrole.yaml
+grc-policy-addon-role.yaml
+grc-policy-addon-clusterrole.yaml
+grc-role.yaml
+"
 
+for f in $GRC_FILES
+do 
+    cp ./multiclusterhub-operator/pkg/templates/charts/toggle/grc/templates/$f ./policy/charts/grc/templates/
+    $SED -i '/^\s*chart:/d' ./policy/charts/grc/templates/$f
+    $SED -i '/^\s*release:/d' ./policy/charts/grc/templates/$f
+    $SED -i '/^\s*app.kubernetes.io/d' ./policy/charts/grc/templates/$f
+done
 
-# for f in $GRC_FILES
-# do 
-#     cp $f ./policy/charts/grc/templates/
-# done
+$SED -i '/^\s*namespace:/d' ./policy/charts/grc/templates/grc-clusterrole.yaml
+$SED -i '/^\s*namespace:/d' ./policy/charts/grc/templates/grc-policy-addon-clusterrole.yaml
+
 
 # update cluster-lifecycle sub-chart
-#cp ./multiclusterhub-operator/pkg/templates/charts/toggle/cluster-lifecycle/Chart.yaml ./policy/charts/cluster-lifecycle/
-#cp ./multiclusterhub-operator/pkg/templates/charts/toggle/cluster-lifecycle/values.yaml ./policy/charts/cluster-lifecycle/
-
-CLUSTER_LIFECYCLE_FILES="./multiclusterhub-operator/pkg/templates/charts/toggle/cluster-lifecycle/templates/klusterlet-addon-role.yaml
-./multiclusterhub-operator/pkg/templates/charts/toggle/cluster-lifecycle/templates/klusterlet-addon-role_binding.yaml"
-#./multiclusterhub-operator/pkg/templates/charts/toggle/cluster-lifecycle/templates/klusterlet-addon-deployment.yaml"
+CLUSTER_LIFECYCLE_FILES="./multiclusterhub-operator/pkg/templates/charts/toggle/cluster-lifecycle/templates/klusterlet-addon-role.yaml 
+./multiclusterhub-operator/pkg/templates/charts/toggle/cluster-lifecycle/templates/klusterlet-addon-role_binding.yaml 
+./multiclusterhub-operator/pkg/templates/charts/toggle/cluster-lifecycle/templates/klusterlet-addon-deployment.yaml"
 
 for f in $CLUSTER_LIFECYCLE_FILES
 do 
     cp $f ./policy/charts/cluster-lifecycle/templates/
 done
 
+#!/bin/bash
+
+$SED -E -i 's|^(\s*image:\s*).*|\1"{{ .Values.global.registryOverride }}/{{ .Values.global.imageOverrides.klusterlet_addon_controller }}"|' "./policy/charts/cluster-lifecycle/templates/klusterlet-addon-deployment.yaml"
+
 rm -rf multiclusterhub-operator
 
 
-# update e2e mce chart
+# update version in policy chart
+CHART_FILES="./policy/Chart.yaml
+./policy/charts/grc/Chart.yaml
+./policy/charts/cluster-lifecycle/Chart.yaml"
 
+for f in $CHART_FILES
+do
+    $SED -E -i "s/version: .*/version: v$POLICY_VERSION/" "$f"
+    $SED -E -i "s/appVersion: .*/appVersion: v$POLICY_VERSION/" "$f"
+done
+
+
+# update e2e mce chart
 rm -rf backplane-operator
 
 git clone --depth 1 --branch "backplane-$MCE_VERSION" https://github.com/stolostron/backplane-operator.git
@@ -74,6 +81,6 @@ git clone --depth 1 --branch "backplane-$MCE_VERSION" https://github.com/stolost
 cp ./backplane-operator/config/crd/bases/multicluster.openshift.io_multiclusterengines.yaml ./hack/mce-chart/crds/
 cp ./backplane-operator/config/rbac/role.yaml ./hack/mce-chart/templates/clusterrole.yaml
 
-$SED -i 's/multicluster-engine-operator-role/multicluster-engine-operator/' ./hack/mce-chart/templates/clusterrole.yaml
 
 rm -rf backplane-operator
+
