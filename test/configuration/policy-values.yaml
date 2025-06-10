@@ -3,11 +3,11 @@ global:
 
   imageOverrides:
     # upstream images
-    governance_policy_propagator: "governance-policy-propagator:2.13.0-SNAPSHOT-2025-03-20-18-18-29"
-    governance_policy_addon_controller: "governance-policy-addon-controller:2.13.0-SNAPSHOT-2025-03-20-18-18-29"
-    config_policy_controller: "config-policy-controller:2.13.0-SNAPSHOT-2025-03-20-18-18-29"
-    governance_policy_framework_addon: "governance-policy-framework-addon:2.13.0-SNAPSHOT-2025-03-20-18-18-29"
-    klusterlet_addon_controller: "klusterlet-addon-controller:2.13.0-SNAPSHOT-2025-03-20-18-18-29"
+    governance_policy_propagator: "governance-policy-propagator:2.14.0-SNAPSHOT-2025-06-09-09-16-54"
+    governance_policy_addon_controller: "governance-policy-addon-controller:2.14.0-SNAPSHOT-2025-06-09-09-16-54"
+    config_policy_controller: "config-policy-controller:2.14.0-SNAPSHOT-2025-06-09-09-16-54"
+    governance_policy_framework_addon: "governance-policy-framework-addon:2.14.0-SNAPSHOT-2025-06-09-09-16-54"
+    klusterlet_addon_controller: "klusterlet-addon-controller:2.14.0-SNAPSHOT-2025-06-09-09-16-54"
 
   namespace: multicluster-engine
   pullSecret: open-cluster-management-image-pull-credentials
