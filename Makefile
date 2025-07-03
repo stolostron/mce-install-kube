@@ -41,8 +41,13 @@ PolicyValues?="./test/configuration/policy-values.yaml"
 fmt:
 	go fmt ./test/e2e
 
-update: fmt
-	hack/update.sh
+update: update-chart update-image
+
+update-chart:
+	hack/update-charts.sh
+
+update-image:
+	hack/update-images.sh
 
 install-mce: ensure-helm
 	$(HELM) upgrade --install mce ./hack/mce-chart --set-file images.imageCredentials.dockerConfigJson=$(ImageCredentials)

@@ -9,3 +9,6 @@ e2e.test
 .vscode
 *.tgz
 vendor
+acm-operator-bundle
+mce-operator-bundle
+multiclusterhub-operator
