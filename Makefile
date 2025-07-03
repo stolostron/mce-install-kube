@@ -2,6 +2,10 @@ export ACM_VERSION?=2.14
 export MCE_VERSION?=2.9
 export POLICY_VERSION?=2.14.0
 
+export UPSTREAM_TAG=2.14.0-SNAPSHOT-2025-07-02-07-33-24
+export DOWNSTREAM_MCE_TAG=2.9.0-1750863110
+export DOWNSTREAM_POLICY_TAG=2.14.0-1751055090
+
 GOHOSTOS:=$(shell uname -s | tr '[:upper:]' '[:lower:]')
 
 SED_CMD:=sed
@@ -41,8 +45,13 @@ PolicyValues?="./test/configuration/policy-values.yaml"
 fmt:
 	go fmt ./test/e2e
 
-update: fmt
-	hack/update.sh
+update: fmt update-chart update-image
+
+update-chart:
+	hack/update-charts.sh
+
+update-image:
+	hack/update-images.sh
 
 install-mce: ensure-helm
 	$(HELM) upgrade --install mce ./hack/mce-chart --set-file images.imageCredentials.dockerConfigJson=$(ImageCredentials)
