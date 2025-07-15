@@ -1,6 +1,13 @@
-export ACM_VERSION?=2.14
-export MCE_VERSION?=2.9
-export POLICY_VERSION?=2.14.0
+ACM_VERSION=2.14.0
+MCE_VERSION=2.9.0
+ACM_OPERATOR_BUNDLE_IMAGE=quay.io/acm-d/acm-operator-bundle:2.14.0-c4ffba8
+MCE_OPERATOR_BUNDLE_IMAGE=quay.io/acm-d/mce-operator-bundle:2.9.0-1752520057
+
+export ACM_VERSION
+export MCE_VERSION
+export ACM_OPERATOR_BUNDLE_IMAGE
+export MCE_OPERATOR_BUNDLE_IMAGE
+
 
 GOHOSTOS:=$(shell uname -s | tr '[:upper:]' '[:lower:]')
 
@@ -41,10 +48,13 @@ PolicyValues?="./test/configuration/policy-values.yaml"
 fmt:
 	go fmt ./test/e2e
 
-update: update-chart update-image
+update: update-policy-chart update-mce-chart update-image
 
-update-chart:
-	hack/update-charts.sh
+update-policy-chart:
+	tools/update-policy-chart.sh
+
+update-mce-chart:
+	hack/update-mce-chart.sh
 
 update-image:
 	hack/update-images.sh
