@@ -1,8 +1,8 @@
-export ACM_VERSION?=2.14.0
-export MCE_VERSION?=2.9.0
-export ACM_OPERATOR_BUNDLE_IMAGE?=quay.io/acm-d/acm-operator-bundle:2.14.0-c4ffba8
-export MCE_OPERATOR_BUNDLE_IMAGE?=quay.io/acm-d/mce-operator-bundle:2.9.0-1752520057
-
+export ACM_VERSION?=2.14.1
+export MCE_VERSION?=2.9.1
+export ACM_OPERATOR_BUNDLE_IMAGE?=quay.io/acm-d/acm-operator-bundle:2.14.1-94fe1f9
+export MCE_OPERATOR_BUNDLE_IMAGE?=quay.io/acm-d/mce-operator-bundle:2.9.1-7a2bf7b
+export ACM_UPSTREAM_TAG?=2.14.0-SNAPSHOT-2025-10-23-01-15-02
 
 GOHOSTOS:=$(shell uname -s | tr '[:upper:]' '[:lower:]')
 
@@ -57,11 +57,18 @@ update-image:
 install-mce: ensure-helm
 	$(HELM) upgrade --install mce ./hack/mce-chart --set-file images.imageCredentials.dockerConfigJson=$(ImageCredentials)
 
-install-policy: ensure-helm
-	$(HELM) upgrade --install policy ./policy
+install-upstream-mce: ensure-helm
+	$(HELM) upgrade --install mce ./hack/mce-chart -f ./test/configuration/mce-values.yaml
 
 install-e2e-mce: ensure-helm
 	$(HELM) upgrade --install mce ./hack/mce-chart -f $(MCEValues) --set images.imageCredentials.userName=$(UserName),images.imageCredentials.password=$(Password)
+
+install-policy: ensure-helm
+	$(HELM) upgrade --install policy ./policy
+
+install-upstream-policy: ensure-helm
+	$(HELM) upgrade --install policy ./policy -f ./test/configuration/policy-values.yaml
+
 
 install-e2e-policy: ensure-helm
 	$(HELM) upgrade --install policy ./policy -f $(PolicyValues)
