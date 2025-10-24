@@ -169,16 +169,20 @@ fi
 echo "ACM version is $ACM_VERSION"
 
 # update the upstream images
-upstream_tag=$(curl -s -X GET "https://quay.io/api/v1/repository/stolostron/acm-custom-registry/tag/?limit=10" | jq -r ".tags | .[] | select(.name | startswith(\"$ACM_VERSION\")) | .name" | head -n 1)
+# upstream_tag=$(curl -s -X GET "https://quay.io/api/v1/repository/stolostron/acm-custom-registry/tag/?limit=10" | jq -r ".tags | .[] | select(.name | startswith(\"$ACM_VERSION\")) | .name" | head -n 1)
 
-if [[ -z "$upstream_tag" ]]; then
-  echo "Error: No tag found for ACM_VERSION '${ACM_VERSION}'"
+# if [[ -z "$upstream_tag" ]]; then
+#   echo "Error: No tag found for ACM_VERSION '${ACM_VERSION}'"
+#   exit 1
+# fi
+
+if [[ -z "${ACM_UPSTREAM_TAG:-}" ]]; then
+  echo "Error: ACM_UPSTREAM_TAG environment variable must be set."
   exit 1
 fi
-
-echo "The latest upstream image tag is $upstream_tag, update the values.yaml"
-update_upstream_mce_images "./test/configuration/mce-values.yaml" "$upstream_tag"
-update_policy_images "./test/configuration/policy-values.yaml" "$upstream_tag"
+echo "The latest upstream image tag is $ACM_UPSTREAM_TAG, update the values.yaml"
+update_upstream_mce_images "./test/configuration/mce-values.yaml" "$ACM_UPSTREAM_TAG"
+update_policy_images "./test/configuration/policy-values.yaml" "$ACM_UPSTREAM_TAG"
 
 
 # update the downstream images
